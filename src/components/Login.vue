@@ -13,32 +13,31 @@ export default {
       console.log("Email:", this.email);
       console.log("Password:", this.password);
       this.submitted = true;
+      const postData = new URLSearchParams();
+      postData.append("email", this.email);
+      postData.append("password", this.password);
 
-      const postData = {
-        email: this.email,
-        password: this.password,
-      };
-
-      fetch("endpoint", {
+      const endpoint = "http://localhost:3001/users/login";
+      
+      fetch(endpoint, {
         method: 'POST',
-        body: JSON.stringify(postData),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        credentials: 'include',
+        body: postData.toString(),
       })
         .then((response) => response.json())
         .then((data) => {
           console.log('Response:', data);
+
         })
         .catch((error) => {
           console.error('Error:', error.message);
         });
+        
+        console.log(document.cookie);
     }
-    /* promisifiedTimeout (time) {
-     return new Promise((res) => setTimeout(() => res(time + 'ms'), time))
-   },
-
-   async f() {
-     await this.promisifiedTimeout(2000);
-     this.email = "123";
-   }, */
   },
 };
 </script>
