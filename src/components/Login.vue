@@ -1,4 +1,6 @@
 <script>
+import { LoginEndpoint } from '@/endpoints';
+
 export default {
   data() {
     return {
@@ -17,9 +19,9 @@ export default {
       postData.append("email", this.email);
       postData.append("password", this.password);
 
-      const endpoint = "http://localhost:3001/users/login";
+  
       
-      fetch(endpoint, {
+      fetch(LoginEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -49,8 +51,7 @@ export default {
 
     <label for="password">Password</label>
     <input type="password" v-model="password" required>
-
-    <button type="submit">Login</button>
+    <button class="btn btn-primary" type="submit">Login</button>
   </form>
 </template>
 
