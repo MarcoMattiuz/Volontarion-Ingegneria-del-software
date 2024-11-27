@@ -6,8 +6,6 @@ export default {
     return {
       formData:{
         name: "",
-        surname: "",
-        age: 0,
         email: "",
         phone: "",
         password: "",
@@ -56,12 +54,6 @@ export default {
   <form @submit.prevent="handleSubmit">
     <label for="name">name</label>
     <input type="text" v-model="formData.name" required>
-
-    <label for="surname">Surname</label>
-    <input type="text" v-model="formData.surname" required>
-
-    <label for="age">Age</label>
-    <input type="number" v-model="formData.age" min="1" max="200" required>
 
     <label for="email">Email</label>
     <input type="email" v-model="formData.email" required>
