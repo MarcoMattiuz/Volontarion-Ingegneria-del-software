@@ -1,11 +1,13 @@
 <script setup>
 import Login from './components/Login.vue';
 import ImageUpload from './components/ImageUpload.vue';
+import GetProfilePicture from './components/GetProfilePicture.vue';
 </script>
 
 <template>
-  <ImageUpload></ImageUpload>
   <Login></Login>
+  <ImageUpload></ImageUpload>
+  <GetProfilePicture></GetProfilePicture>
   
 </template>
 
