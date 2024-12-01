@@ -18,26 +18,25 @@ export default {
       postData.append("password", this.password);
 
       const endpoint = "http://localhost:3001/users/login";
-      
+
       fetch(endpoint, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-        credentials: 'include',
+        credentials: "include",
         body: postData.toString(),
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log('Response:', data);
-
+          console.log("Response:", data);
         })
         .catch((error) => {
-          console.error('Error:', error.message);
+          console.error("Error:", error.message);
         });
-        
-        console.log(document.cookie);
-    }
+
+      console.log(document.cookie);
+    },
   },
 };
 </script>
@@ -45,10 +44,10 @@ export default {
 <template>
   <form @submit.prevent="handleSubmit" method="POST">
     <label for="email">Email</label>
-    <input type="email" v-model="email" required>
+    <input type="email" v-model="email" required />
 
     <label for="password">Password</label>
-    <input type="password" v-model="password" required>
+    <input type="password" v-model="password" required />
 
     <button type="submit">Login</button>
   </form>
