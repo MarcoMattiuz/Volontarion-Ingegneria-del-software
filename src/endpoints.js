@@ -7,3 +7,4 @@ export const LoginEndpoint = domain + "/users/login";
 export const RegistrazioneVolontarioEndpoint =
   domain + "/users/registrazioneVolontario";
 export const GetProfilePictureEndpoint = domain + "/users/getProfilePicture";
+export const DeleteAccountEndpoint = domain + "/users/deleteAccount";
