@@ -4,26 +4,16 @@ import { checkIfLoggedIn } from '@/checkLogged';
 export default {
   data() {
     return {
-      isFileUploaded: false,
       file: null,
       base64File: null,
     };
   },
   methods: {
-    async handleFileUpload(event) {
-      checkIfLoggedIn().then((response)=> {
-        const file = event.target.files[0];
-        if (file) {
+    handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
         this.file = file;
-        this.createSubmitButton(this.file);
       }
-      }).catch((error) => {
-          console.error('Error:', error.message);
-        });
-    },
-
-    createSubmitButton(file) {
-      this.isFileUploaded = true;
     },
 
     handleSubmit() {
@@ -32,21 +22,21 @@ export default {
 
         reader.onload = (e) => {
           this.base64File = e.target.result;
-
           this.sendImage();
         };
-
+        reader.onerror = () => {
+        console.log('Failed to read the file. Please try again.');
+         };
         reader.readAsDataURL(this.file);
       }
     },
 
     sendImage() {
-      console.log("image");
-      console.log(JSON.stringify(this.base64File));
+      console.log("base 64:"+JSON.stringify(this.base64File));
       fetch(ChangeImageVolontarioEndpoint, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ pimage: this.base64File }),
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image: this.base64File }),
         credentials: 'include'
       })
         .then((response) => response.json())
@@ -57,15 +47,11 @@ export default {
           console.error('Error:', error.message);
         });
     },
-
-
   }
-};
+}
 </script>
 
 <template>
-    <input type="file" @change="handleFileUpload" accept="image/*" />
-    <div v-if="isFileUploaded">
-      <button v-on:click="handleSubmit">Submit</button>
-    </div>
+  <input type="file" @change="handleFileUpload" accept="image/*" />
+  <button class="btn btn-primary" v-on:click="handleSubmit">Submit</button>
 </template>
