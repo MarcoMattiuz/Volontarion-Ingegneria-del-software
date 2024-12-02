@@ -7,11 +7,23 @@ import DeleteAccount from './components/DeleteAccount.vue';
 import Sidebar from './components/Sidebar.vue'
 </script>
 
+
 <template>
   <Sidebar></Sidebar>
-  <div class="offsetSidebar">
-    <RouterView></RouterView>
-  </div>
+    <div class="offsetSidebar">
+      <RouterView></RouterView>
+    </div>
+  <!--
+  <RegistrazioneVolontario></RegistrazioneVolontario>
+  <br>
+  <br>
+  <br>
+  <Login></Login>
+  <br>
+  <ImageUpload></ImageUpload>
+  <GetProfilePicture></GetProfilePicture>
+  <DeleteAccount></DeleteAccount>
+  -->
   
 </template>
 
