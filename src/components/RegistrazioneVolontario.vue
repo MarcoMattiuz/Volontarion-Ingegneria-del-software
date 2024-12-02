@@ -67,7 +67,7 @@ export default {
     <input type="email" v-model="formData.email" required>
 
     <label for="phone">Phone</label>
-    <input type="tel" v-model="formData.tel">
+    <input type="tel" v-model="formData.phone">
 
     <label for="password">Password</label>
     <input type="password" v-model="formData.password" required>
