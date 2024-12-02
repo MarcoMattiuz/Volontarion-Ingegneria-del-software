@@ -1,8 +1,10 @@
 <script setup>
 import Login from './components/Login.vue';
 import ImageUpload from './components/ImageUpload.vue';
-import { RouterView } from 'vue-router';
-import Sidebar from './components/Sidebar.vue';
+import GetProfilePicture from './components/GetProfilePicture.vue';
+import RegistrazioneVolontario from './components/RegistrazioneVolontario.vue';
+import DeleteAccount from './components/DeleteAccount.vue';
+import Sidebar from './components/Sidebar.vue'
 </script>
 
 <template>
@@ -10,9 +12,6 @@ import Sidebar from './components/Sidebar.vue';
   <div class="offsetSidebar">
     <RouterView></RouterView>
   </div>
-  
-  
-  
   
 </template>
 

@@ -1,5 +1,6 @@
 <template>
-    <div class="fixed top-0 left-0 h-screen w-16 m-0 p-0 flex flex-col bg-gray-900 text-white shadow">
+    <div class="fixed top-0 left-0 h-screen w-16 m-0 p-0 flex flex-col shadow"
+        :class="`bg-${theme}`,`text-${text}`">
         <div class="sidebar-icon group">
             <font-awesome-icon icon="bars" />
             <span class="sidebar-tooltip group-hover:scale-100">
@@ -24,7 +25,7 @@
                 Account
             </span>
         </div>
-        <div class="sidebar-toggle sidebar-footer mt-auto ">
+        <div class="sidebar-toggle sidebar-footer mt-auto " @click="changetheme()">
             <label class="grid cursor-pointer place-items-center">
                 <input
                     type="checkbox"
@@ -69,12 +70,39 @@
 export default{
     data(){
         return{
-            
+            theme: 'gray-900',
+            text: 'gray-200',
         }
     },
     methods: {
     redirectTo(url) {
       this.$router.push(url);
+    },
+    changetheme(){ //work in progress
+                let theme='gray-900';
+                let text='gray-200';
+                if(this.theme=='gray-200'){
+                    theme='gray-900';
+                    text='gray-200';
+                }else{
+                    theme='gray-200';
+                    text='gray-900';
+                }
+                this.theme=theme;
+                this.text=text;
+                this.storethemesetting();
+            },
+    storethemesetting(){
+        localStorage.setItem('theme',this.theme);
+        localStorage.setItem('text',this.text);
+    },
+    getthemesetting(){
+        let theme = localStorage.getItem('theme');
+        let text = localStorage.getItem('text');
+        if(theme){
+            this.theme = theme;
+            this.text = text;
+        }
     }
   }
     
