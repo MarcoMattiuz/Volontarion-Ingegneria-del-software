@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/components/HomeView.vue'
-import Login from '@/components/Login.vue'
-import ImageUpload from '@/components/ImageUpload.vue'
+import Login from '@/components/login_signup/Login.vue'
+import ImageUpload from '@/components/util/ImageUpload.vue'
+import ListaAssociazioni from '@/components/ListaAssociazioni.vue'
+import RegistrazioneAssociazione from '@/components/login_signup/RegistrazioneAssociazione.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,6 +22,16 @@ const router = createRouter({
       path: '/imageupload',
       name: 'imageupload',
       component: ImageUpload,
+    },
+    {
+      path: '/listaAssociazioni',
+      name: 'listaAssociazioni',
+      component: ListaAssociazioni,
+    },
+    {
+      path: '/registrazioneAssociazione',
+      name: 'registrazioneAssociazione',
+      component: RegistrazioneAssociazione,
     },
 
     /*{
