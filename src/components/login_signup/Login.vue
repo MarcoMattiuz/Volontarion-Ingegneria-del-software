@@ -1,5 +1,5 @@
 <script>
-import { LoginEndpointVolontario } from '@/endpoints';
+import { LoginEndpointVolontario } from "@/endpoints";
 
 export default {
   data() {
@@ -21,15 +21,9 @@ export default {
       postData.append("email", this.email);
       postData.append("password", this.password);
 
-<<<<<<< HEAD:src/components/Login.vue
-      fetch(LoginEndpoint, {
-        method: "POST",
-=======
-
       //aggiungere endpoint login associazione
       fetch(LoginEndpointVolontario, {
-        method: 'POST',
->>>>>>> 5312679b2ba0ed5ef86f35eb73eb4994ed1f53c8:src/components/login_signup/Login.vue
+        method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
@@ -39,7 +33,7 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           //
-          localStorage.setItem('userType', this.tipo);
+          localStorage.setItem("userType", this.tipo);
           //
           console.log("Response:", data);
         })
@@ -51,17 +45,16 @@ export default {
     },
 
     toggle() {
-      console.log(this.tipo+" "+this.message);
+      console.log(this.tipo + " " + this.message);
       if (this.tipo == "volontario") {
         this.tipo = "associazione";
         this.message = "sono volontario";
-      }
-      else if (this.tipo == "associazione") {
+      } else if (this.tipo == "associazione") {
         this.tipo = "volontario";
         this.message = "sono associazione";
       }
     },
-  }
+  },
 };
 </script>
 
