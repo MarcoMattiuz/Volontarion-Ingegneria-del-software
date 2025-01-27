@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
     <aside id="sidebar" ref="sidebar">
         <ul>
             <li>
@@ -42,7 +43,6 @@
 
     </aside>
     
-
 
 </template>
 
