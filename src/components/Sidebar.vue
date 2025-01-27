@@ -14,6 +14,12 @@
             </span>
         </div>
         <div class="sidebar-icon group" @click="redirectTo('/login')">
+            <font-awesome-icon icon="fa-right-to-bracket" />
+            <span class="sidebar-tooltip group-hover:scale-100">
+                login
+            </span>
+        </div>
+        <div class="sidebar-icon group" @click="redirectTo('/profilo')">
             <font-awesome-icon icon="user" />
             <span class="sidebar-tooltip group-hover:scale-100">
                 Profilo

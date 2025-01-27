@@ -4,6 +4,7 @@ import Login from '@/components/login_signup/Login.vue'
 import ImageUpload from '@/components/util/ImageUpload.vue'
 import ListaAssociazioni from '@/components/ListaAssociazioni.vue'
 import RegistrazioneAssociazione from '@/components/login_signup/RegistrazioneAssociazione.vue'
+import Profilo from '@/components/account/Profilo.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
       path: '/registrazioneAssociazione',
       name: 'registrazioneAssociazione',
       component: RegistrazioneAssociazione,
+    },
+    {
+      path: '/profilo',
+      name: 'profilo',
+      component: Profilo,
     },
 
     /*{

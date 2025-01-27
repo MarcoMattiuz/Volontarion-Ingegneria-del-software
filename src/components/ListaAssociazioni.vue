@@ -3,7 +3,10 @@ import { getAssociazioniEndpoint } from '@/endpoints';
 
 export default {
   data() {
-    Associazioni : []
+    return{
+      Associazioni : []
+    }
+    
   },
   mounted() {
     this.getAssociazioni();
@@ -21,8 +24,9 @@ export default {
           } else {
             response.json()
               .then((data) => {
-                console.log('Response:', data);
+                
                 this.Associazioni = data;
+                console.log('Associazioni:', this.Associazioni);
               })
               .catch((error) => {
                 console.log('Error reading response:', error.message);
@@ -36,8 +40,7 @@ export default {
 <template>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-    <div v-for="(item, index) in Associazioni" :key="index" class="card w-96 bg-base-100 shadow-xl">
+    <div v-for="(item, index) in this.Associazioni" :key="index" class="card w-96 bg-base-100 shadow-xl">
       <figure><img :src="item.image" alt="Card image" /></figure>
       <div class="card-body">
         <h2 class="card-title">{{ item.name }}</h2>
