@@ -1,9 +1,11 @@
 <script>
-import { LoginEndpoint } from '@/endpoints';
+import { LoginEndpointVolontario } from '@/endpoints';
 
 export default {
   data() {
     return {
+      message: "sono associazione",
+      tipo: "volontario",
       email: "",
       password: "",
       submitted: false, // Track if the form was submitted
@@ -22,9 +24,9 @@ export default {
       postData.append("email", this.email);
       postData.append("password", this.password);
 
-  
-      
-      fetch(LoginEndpoint, {
+
+      //aggiungere endpoint login associazione
+      fetch(LoginEndpointVolontario, {
         method: 'POST',
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -34,6 +36,9 @@ export default {
       })
         .then((response) => response.json())
         .then((data) => {
+          //
+          localStorage.setItem('userType', this.tipo);
+          //
           console.log("Response:", data);
         })
         .catch((error) => {
@@ -46,7 +51,20 @@ export default {
       this.$router.push(url);
     },
   },
-};
+
+    toggle() {
+      console.log(this.tipo+" "+this.message);
+      if (this.tipo == "volontario") {
+        this.tipo = "associazione";
+        this.message = "sono volontario";
+      }
+      else if (this.tipo == "associazione") {
+        this.tipo = "volontario";
+        this.message = "sono associazione";
+      }
+    },
+  }
+;
 </script>
 
 <template>
@@ -64,6 +82,16 @@ export default {
   
 
   
+  <p> login {{ tipo }}</p>
+  <form @submit.prevent="handleSubmit" method="POST">
+    <label for="email">Email</label>
+    <input type="email" v-model="email" required />
+
+    <label for="password">Password</label>
+    <input type="password" v-model="password" required>
+    <button @click="toggle" type="button" class="btn btn-primary">{{ message }}</button>
+    <button class="btn btn-primary" type="submit">Login</button>
+  </form>
 </template>
 
 <style scoped></style>

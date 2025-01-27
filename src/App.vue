@@ -7,7 +7,6 @@ import DeleteAccount from './components/account/DeleteAccount.vue';
 import Sidebar from './components/Sidebar.vue'
 </script>
 
-
 <template>
   <div class="app">
     <Sidebar></Sidebar>
@@ -36,6 +35,10 @@ import Sidebar from './components/Sidebar.vue'
   -->
   
 </template>
+
+
+  
+
 
 <style scoped>
 
