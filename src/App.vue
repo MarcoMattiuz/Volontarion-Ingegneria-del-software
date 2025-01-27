@@ -9,10 +9,20 @@ import Sidebar from './components/Sidebar.vue'
 
 
 <template>
-  <Sidebar></Sidebar>
-    <div class="offsetSidebar">
+  <div class="app">
+    <Sidebar></Sidebar>
+    <main class="routerview">
       <RouterView></RouterView>
-    </div>
+    </main>
+      
+    
+  
+  </div>
+  
+  
+  
+  
+  
   <!--
   <RegistrazioneVolontario></RegistrazioneVolontario>
   <br>

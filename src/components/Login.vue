@@ -8,8 +8,11 @@ export default {
       password: "",
       submitted: false, // Track if the form was submitted
     };
+    
   },
-
+  components: {
+    
+  },
   methods: {
     handleSubmit() {
       console.log("Email:", this.email);
@@ -39,19 +42,28 @@ export default {
 
       console.log(document.cookie);
     },
+    redirectTo(url) {
+      this.$router.push(url);
+    },
   },
 };
 </script>
 
 <template>
-  <form @submit.prevent="handleSubmit" method="POST">
-    <label for="email">Email</label>
-    <input type="email" v-model="email" required />
+  <div class="login-container">
+    <form class="login-form" @submit.prevent="handleSubmit" method="POST">
+      <label for="email">Email</label>
+      <input class="containter" type="email" v-model="email" required />
 
-    <label for="password">Password</label>
-    <input type="password" v-model="password" required>
-    <button class="btn btn-primary" type="submit">Login</button>
-  </form>
+      <label for="password">Password</label>
+      <input class="containter" type="password" v-model="password" required>
+      <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+    <a @click="redirectTo('/registrazione')">Non sei registrato?</a>
+  </div>
+  
+
+  
 </template>
 
 <style scoped></style>

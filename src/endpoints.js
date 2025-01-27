@@ -1,4 +1,4 @@
-const domain = "http://localhost:3001";
+const domain = "http://localhost:3001"; 
 
 export const CheckLoggedinEndpoint = domain + "/users/checkLoggedIn";
 export const ChangeImageVolontarioEndpoint =
@@ -6,5 +6,8 @@ export const ChangeImageVolontarioEndpoint =
 export const LoginEndpoint = domain + "/users/login";
 export const RegistrazioneVolontarioEndpoint =
   domain + "/users/registrazioneVolontario";
+  export const RegistrazioneAssociazioneEndpoint =
+  domain + "/users/registrazioneAssociazione";
 export const GetProfilePictureEndpoint = domain + "/users/getProfilePicture";
 export const DeleteAccountEndpoint = domain + "/users/deleteAccount";
+export const ListaAssociazioniEndpoint = domain + "/api/lista_associazioni";

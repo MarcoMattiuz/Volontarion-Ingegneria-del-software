@@ -1,75 +1,59 @@
 <template>
-    <div class="fixed top-0 left-0 h-screen w-16 m-0 p-0 flex flex-col shadow"
-        :class="`bg-${theme}`,`text-${text}`">
-        <div class="sidebar-icon group">
-            <font-awesome-icon icon="bars" />
-            <span class="sidebar-tooltip group-hover:scale-100">
-                Sidebar
-            </span>
-        </div>
-        <div class="sidebar-icon group" @click="redirectTo('/')">
-            <font-awesome-icon icon="home" />
-            <span class="sidebar-tooltip group-hover:scale-100">
-                Home
-            </span>
-        </div>
-        <div class="sidebar-icon group" @click="redirectTo('/login')">
-            <font-awesome-icon icon="user" />
-            <span class="sidebar-tooltip group-hover:scale-100">
-                Profilo
-            </span>
-        </div>
-        <div class="sidebar-icon group">
-            <font-awesome-icon icon="cog" />
-            <span class="sidebar-tooltip group-hover:scale-100">
-                Account
-            </span>
-        </div>
-        <div class="sidebar-toggle sidebar-footer mt-auto " @click="changetheme()">
-            <label class="grid cursor-pointer place-items-center">
-                <input
-                    type="checkbox"
-                    value="synthwave"
-                    class="toggle theme-controller bg-base-content col-span-2 col-start-1 row-start-1" />
-                <svg
-                    class="stroke-base-100 fill-base-100 col-start-1 row-start-1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="5" />
-                    <path
-                    d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
-                </svg>
-                <svg
-                    class="stroke-base-100 fill-base-100 col-start-2 row-start-1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                </svg>
-                </label>
-        </div>
-    </div>
+    <aside id="sidebar" ref="sidebar">
+        <ul>
+            <li>
+                <span class="logo">VolontariOn</span>
+                <button @click="toggleSidebar()" id="toggle-btn" ref="toggle-btn">
+                    <font-awesome-icon :icon="['fas', 'angles-left']" />
+                </button>
+            </li>
+            <li class="active">
+                <a @click="redirectTo('/')">
+                    <font-awesome-icon icon="home" />
+                    <span>Home</span>
+                </a>
+            </li>
+            <li>
+                <button @click="toggleSubMenu($event)" class="dropdown-btn">
+                    <font-awesome-icon icon="user" />
+                    <span>Area utente</span>
+                    <font-awesome-icon :icon="['fas', 'chevron-down']" />
+                </button>
+                <ul class="sub-menu">
+                    <div>
+                        <li><a @click="redirectTo('/login')">
+                                <font-awesome-icon icon="user" />
+                                <span>
+                                    Area utente
+                                </span>
+                            </a>                        
+                        </li>
+                        <li><a @click="redirectTo('/login')">
+                                <font-awesome-icon icon="user" />
+                                <span>
+                                    Area utente
+                                </span>
+                            </a>                        
+                        </li>
+                    </div>
+                </ul>
+            </li>
+        </ul>
+
+    </aside>
+    
+
+
 </template>
 
 <script>
 
 
 export default{
+
     data(){
         return{
+            
             theme: 'gray-900',
             text: 'gray-200',
         }
@@ -78,20 +62,55 @@ export default{
     redirectTo(url) {
       this.$router.push(url);
     },
-    changetheme(){ //work in progress
-                let theme='gray-900';
-                let text='gray-200';
-                if(this.theme=='gray-200'){
-                    theme='gray-900';
-                    text='gray-200';
-                }else{
-                    theme='gray-200';
-                    text='gray-900';
-                }
-                this.theme=theme;
-                this.text=text;
-                this.storethemesetting();
-            },
+    toggleSubMenu(event) {
+            const sidebar = document.getElementById('sidebar');
+            const toggleButton = document.getElementById('toggle-btn');
+            // Ensure event is passed and is valid
+            if (!event) return;
+            
+            // Find the closest dropdown button
+            const button = event.target.closest('.dropdown-btn');
+            if (!button) return;
+
+            // Toggle submenu
+            const subMenu = button.nextElementSibling;
+            if (subMenu) {
+                subMenu.classList.toggle('show');
+                button.classList.toggle('rotate');
+            }
+            if (sidebar.classList.contains('close')){
+                sidebar.classList.toggle('close');
+                toggleButton.classList.toggle('rotate');
+            }
+            
+        
+    },
+    toggleSidebar() {
+        const body = document.body;
+        const sidebar = document.getElementById('sidebar');
+        const toggleButton = document.getElementById('toggle-btn');
+        
+        if (sidebar) {
+            sidebar.classList.toggle('close');
+            body.classList.toggle('sidebar-closed');
+        }
+        if (toggleButton) {
+            toggleButton.classList.toggle('rotate');
+        }
+        this.closeAllSubMenus();
+    },
+    closeAllSubMenus() {
+        const sidebar = document.getElementById('sidebar');
+        if (sidebar) {
+            Array.from(sidebar.getElementsByClassName('show')).forEach(ul => {
+                ul.classList.remove('show');
+                ul.previousElementSibling.classList.remove('rotate');
+            });
+        }
+    },
+    toggleDarkMode() {
+        document.documentElement.classList.toggle('my-app-dark');
+    },
     storethemesetting(){
         localStorage.setItem('theme',this.theme);
         localStorage.setItem('text',this.text);
