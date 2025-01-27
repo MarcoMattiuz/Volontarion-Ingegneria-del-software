@@ -1,31 +1,27 @@
 <script setup>
-import Login from './components/Login.vue';
-import ImageUpload from './components/ImageUpload.vue';
-import GetProfilePicture from './components/GetProfilePicture.vue';
-import RegistrazioneVolontario from './components/RegistrazioneVolontario.vue';
-import DeleteAccount from './components/DeleteAccount.vue';
+import Login from './components/login_signup/Login.vue';
+import ImageUpload from './components/util/ImageUpload.vue';
+import GetProfilePicture from './components/util/GetProfilePicture.vue';
+import RegistrazioneVolontario from './components/login_signup/RegistrazioneVolontario.vue';
+import DeleteAccount from './components/account/DeleteAccount.vue';
 import Sidebar from './components/Sidebar.vue'
 </script>
 
-
 <template>
-  <Sidebar></Sidebar>
-    <div class="offsetSidebar">
+  <div class ="flex" >
+    <!-- Sidebar -->
+    <Sidebar class ="bg-primary w-16 flex-none"></Sidebar>
+    
+    <!-- Main Content -->
+    <div class="bg-primary-content pl-36 p-20 flex-auto">
       <RouterView></RouterView>
     </div>
-  <!--
-  <RegistrazioneVolontario></RegistrazioneVolontario>
-  <br>
-  <br>
-  <br>
-  <Login></Login>
-  <br>
-  <ImageUpload></ImageUpload>
-  <GetProfilePicture></GetProfilePicture>
-  <DeleteAccount></DeleteAccount>
-  -->
-  
+  </div>
 </template>
+
+
+  
+
 
 <style scoped>
 

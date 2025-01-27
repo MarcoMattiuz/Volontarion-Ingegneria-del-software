@@ -1,5 +1,5 @@
 <script>
-import { RegistrazioneVolontarioEndpoint } from '@/endpoints';
+import { RegistrazioneAssociazioneEndpoint } from '@/endpoints';
 
 export default {
   data() {
@@ -17,7 +17,7 @@ export default {
   methods: {
     handleSubmit() {
       const jsonOutput = JSON.stringify(this.formData);
-      fetch(RegistrazioneVolontarioEndpoint, {
+      fetch(RegistrazioneAssociazioneEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ export default {
     <input type="email" v-model="formData.email" required>
 
     <label for="phone">Phone</label>
-    <input type="tel" v-model="formData.tel">
+    <input type="tel" placeholder="888 888 8888" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" maxlength="12" v-model="formData.phone">
 
     <label for="password">Password</label>
     <input type="password" v-model="formData.password" required>

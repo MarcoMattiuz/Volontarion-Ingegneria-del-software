@@ -14,6 +14,12 @@
             </span>
         </div>
         <div class="sidebar-icon group" @click="redirectTo('/login')">
+            <font-awesome-icon icon="fa-right-to-bracket" />
+            <span class="sidebar-tooltip group-hover:scale-100">
+                login
+            </span>
+        </div>
+        <div class="sidebar-icon group" @click="redirectTo('/profilo')">
             <font-awesome-icon icon="user" />
             <span class="sidebar-tooltip group-hover:scale-100">
                 Profilo
@@ -25,6 +31,21 @@
                 Account
             </span>
         </div>
+        <div class="sidebar-icon group" @click="redirectTo('/listaAssociazioni')">
+            <font-awesome-icon icon="spinner" />
+            pagina lista associazioni
+            <span class="sidebar-tooltip group-hover:scale-100">
+                pagina lista associazioni
+            </span>
+        </div>
+        <div class="sidebar-icon group" @click="redirectTo('/registrazioneAssociazione')">
+            <font-awesome-icon icon="spinner" />
+            registrazioneAssociazione
+            <span class="sidebar-tooltip group-hover:scale-100">
+                registrazioneAssociazione
+            </span>
+        </div>
+        <i class="fa-solid fa-user-plus"></i>
         <div class="sidebar-toggle sidebar-footer mt-auto " @click="changetheme()">
             <label class="grid cursor-pointer place-items-center">
                 <input
