@@ -65,15 +65,11 @@ export default {
     <input type="email" v-model="email" required />
 
     <label for="password">Password</label>
-    <<<<<<< HEAD:src/components/Login.vue
     <input type="password" v-model="password" required />
-    =======
     <input type="password" v-model="password" required />
     <button @click="toggle" type="button" class="btn btn-primary">
       {{ message }}
     </button>
-    >>>>>>>
-    5312679b2ba0ed5ef86f35eb73eb4994ed1f53c8:src/components/login_signup/Login.vue
     <button class="btn btn-primary" type="submit">Login</button>
   </form>
 </template>
