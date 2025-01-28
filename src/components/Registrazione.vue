@@ -13,6 +13,8 @@
 
 
     <form v-if="currentForm === 'associazioni'" @submit.prevent="handleAssociazioniSubmit">
+      <label for="name">Foto Profilo</label>
+      <input type="file" @change="handleFileUpload" accept="image/*" />
       <label for="name">Name</label>
       <input type="text" v-model.trim="associazioniFormData.name" required>
 
@@ -27,16 +29,19 @@
       <input type="password" v-model="associazioniFormData.password" required>
 
       <label for="description">Descrizione</label>
-      <textarea v-model="associazioniFormData.description "></textarea>
+      <textarea v-model="associazioniFormData.description"></textarea>
 
       <label for="objectives">Obiettivi</label>
-      <textarea v-model="associazioniFormData.objectives "></textarea>
+      <textarea v-model="associazioniFormData.objectives"></textarea>
 
       <button class="btn btn-primary" type="submit">Registrati</button>
     </form>
 
 
     <form v-else @submit.prevent="handleVolontariSubmit">
+      <label for="name">Foto Profilo</label>
+      <input type="file" @change="handleFileUpload" accept="image/*" />
+
       <label for="name">Name</label>
       <input type="text" v-model.trim="volontariFormData.name" required>
 
@@ -57,10 +62,10 @@
       <input type="password" v-model="volontariFormData.password" required>
 
       <label for="description">Descrizione</label>
-      <textarea v-model="volontariFormData.description "></textarea>
+      <textarea v-model="volontariFormData.description"></textarea>
 
       <label for="experience">Experience</label>
-      <textarea v-model="volontariFormData.experience "></textarea>
+      <textarea v-model="volontariFormData.experience"></textarea>
 
       <h2>Add Your Skills</h2>
       <form @submit.prevent="addSkill">
@@ -92,14 +97,16 @@ export default {
       newSkill: "",
       currentForm: 'volontari',
       associazioniFormData: {
+        profilePicture: "",
         name: "",
         email: "",
         phone: "",
         password: "",
         description: "",
-        objectives :"",
+        objectives: "",
       },
       volontariFormData: {
+        profilePicture: "",
         name: "",
         surname: "",
         age: null,
@@ -114,6 +121,25 @@ export default {
   },
 
   methods: {
+    handleFileUpload(event) {
+      const file = event.target.files[0]; 
+
+      if (file) {
+        const reader = new FileReader();
+
+        reader.onload = () => {
+          const base64String = reader.result;
+
+          if(this.currentForm === 'associazioni'){
+            this.associazioniFormData.profilePicture = base64String;
+            
+          }else this.volontariFormData.profilePicture = base64String;
+
+                };
+
+        reader.readAsDataURL(file);
+    }
+  },
     toggleon_email_alreadyregistered() {
       this.email_registered = true;
     },
@@ -122,7 +148,7 @@ export default {
       this.email_registered = false;
     },
 
-    validateForm(formData){
+    validateForm(formData) {
       return true;
       //opzione required nei input del form
       // Basic validation to prevent empty strings
@@ -174,7 +200,7 @@ export default {
         console.log('Volontari Response:', data);
         // Reset form on success
         this.volontariFormData = {
-          name: "", surname: "", age: null, email: "", phone: "", password: "",description : "",skills:[],experience:""
+          name: "", surname: "", age: null, email: "", phone: "", password: "", description: "", skills: [], experience: "",profilePicture :""
         };
       } catch (error) {
         console.error('Error submitting volontari form:', error);
@@ -205,7 +231,7 @@ export default {
         console.log('Associazioni Response:', data);
         // Reset form on success
         this.associazioniFormData = {
-          name: "", email: "", phone: "", password: "",description : "",objectives : ""
+          name: "", email: "", phone: "", password: "", description: "", objectives: "",profilePicture :""
         };
       } catch (error) {
         console.error('Error submitting associazioni form:', error);

@@ -19,7 +19,6 @@ export default {
     handleSubmit() {
       if (this.file) {
         var reader = new FileReader();
-
         reader.onload = (e) => {
           this.base64File = e.target.result;
           this.sendImage();
