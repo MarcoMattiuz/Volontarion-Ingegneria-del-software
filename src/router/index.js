@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/components/HomeView.vue'
 import Login from '@/components/login_signup/Login.vue'
 import ImageUpload from '@/components/util/ImageUpload.vue'
-import Lista_Associazioni from '@/components/ListaAssociazioni.vue'
+import ListaAssociazioni from '@/components/ListaAssociazioni.vue'
 import RegistrazioneAssociazione from '@/components/login_signup/RegistrazioneAssociazione.vue'
 import Registrazione from '@/components/Registrazione.vue'
 import Profilo from '@/components/account/Profilo.vue'
@@ -25,15 +25,15 @@ const router = createRouter({
       name: 'imageupload',
       component: ImageUpload,
     },
-    {
+    /* {
       path: '/home',
       name: 'casa',
       component: Home,
-    },
+    }, */
     {
-      path: '/associazioni',
+      path: '/listaAssociazioni',
       name: 'lista_associazioni',
-      component: Lista_Associazioni,
+      component: ListaAssociazioni,
     },
     {
       path: '/registrazione',

@@ -40,7 +40,7 @@ export default {
 </script>
 
 <template>
-    <div class="grid grid-cols-4 gap-4">
+    <div class="grid grid-cols-3 gap-4">
         <div class=col-span-3>
             <div class="card card-side bg-base-100 shadow-xl">
                 <figure>
@@ -57,11 +57,26 @@ export default {
                 </div>
             </div>
         </div>
-        <div>associazioni</div>
-        <div>skill</div>
-        <div class=col-span-2>presentazione</div>
-        <div class="col-span-3">esperienza</div>
-        <div class="">eventi</div>
+        <div class ="card card-side bg-base-100">
+            <div class="card-body">
+                    <h2 class="card-title">Skills</h2>
+                    <div v-for="(item, index) in this.profileData.skills" :key="index" >
+                        {{item}}
+                    </div>
+                </div>
+        </div>
+        <div class="col-span-2 card card-side bg-base-100">
+            <div class="card-body">
+                    <h2 class="card-title">Descrizione</h2>
+                    {{this.profileData.description}}
+                </div>
+        </div>
+        <div class="col-span-3 card card-side bg-base-100">
+            <div class="card-body">
+                    <h2 class="card-title">Esperienza</h2>
+                    {{this.profileData.experience}}
+                </div>
+        </div>
     </div>
 </template>
 

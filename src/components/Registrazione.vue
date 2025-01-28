@@ -1,19 +1,16 @@
 <template>
   <div class="registration-container">
     <div class="toggle-buttons">
-      <button 
-        @click="currentForm = 'volontari'; toggleoff_email_alreadyregistered()" 
-        :class="{ active: currentForm === 'volontari' }"
-      >
+      <button @click="currentForm = 'volontari'; toggleoff_email_alreadyregistered()"
+        :class="{ active: currentForm === 'volontari' }">
         Registrazione Volontari
       </button>
-      <button 
-        @click="currentForm = 'associazioni'; toggleoff_email_alreadyregistered()" 
-        :class="{ active: currentForm === 'associazioni' }"
-      >
+      <button @click="currentForm = 'associazioni'; toggleoff_email_alreadyregistered()"
+        :class="{ active: currentForm === 'associazioni' }">
         Registrazione Associazioni
       </button>
     </div>
+
 
     <form v-if="currentForm === 'associazioni'" @submit.prevent="handleAssociazioniSubmit">
       <label for="name">Name</label>
@@ -29,8 +26,15 @@
       <label for="password">Password</label>
       <input type="password" v-model="associazioniFormData.password" required>
 
+      <label for="description">Descrizione</label>
+      <textarea v-model="associazioniFormData.description "></textarea>
+
+      <label for="objectives">Obiettivi</label>
+      <textarea v-model="associazioniFormData.objectives "></textarea>
+
       <button class="btn btn-primary" type="submit">Registrati</button>
     </form>
+
 
     <form v-else @submit.prevent="handleVolontariSubmit">
       <label for="name">Name</label>
@@ -52,6 +56,27 @@
       <label for="password">Password</label>
       <input type="password" v-model="volontariFormData.password" required>
 
+      <label for="description">Descrizione</label>
+      <textarea v-model="volontariFormData.description "></textarea>
+
+      <label for="experience">Experience</label>
+      <textarea v-model="volontariFormData.experience "></textarea>
+
+      <h2>Add Your Skills</h2>
+      <form @submit.prevent="addSkill">
+        <label for="skill">Skill:</label>
+        <input id="skill" v-model="newSkill" type="text" placeholder="Enter a skill" class="input" />
+        <button type="submit" class="btn btn-primary">Add Skill</button>
+      </form>
+
+      <h3>Your Skills:</h3>
+      <ul>
+        <li v-for="(skill, index) in volontariFormData.skills" :key="index">
+          {{ skill }}
+          <button @click="removeSkill(index)" class="btn btn-danger">Remove</button>
+        </li>
+      </ul>
+
       <button class="btn btn-primary" type="submit">Registrati</button>
     </form>
   </div>
@@ -64,12 +89,15 @@ export default {
   data() {
     return {
       email_registered: false,
+      newSkill: "",
       currentForm: 'volontari',
       associazioniFormData: {
         name: "",
         email: "",
         phone: "",
         password: "",
+        description: "",
+        objectives :"",
       },
       volontariFormData: {
         name: "",
@@ -78,6 +106,9 @@ export default {
         email: "",
         phone: "",
         password: "",
+        description: "",
+        experience: "",
+        skills: [],
       }
     };
   },
@@ -86,19 +117,21 @@ export default {
     toggleon_email_alreadyregistered() {
       this.email_registered = true;
     },
-    
+
     toggleoff_email_alreadyregistered() {
       this.email_registered = false;
     },
 
-    validateForm(formData) {
+    validateForm(formData){
+      return true;
+      //opzione required nei input del form
       // Basic validation to prevent empty strings
-      return Object.entries(formData).every(([key, value]) => {
+      /* return Object.entries(formData).every(([key, value]) => {
         if (key === 'phone') return true; // Phone is optional
         if (typeof value === 'string') return value.trim().length > 0;
         if (typeof value === 'number') return value > 0;
         return value !== null && value !== undefined;
-      });
+      }); */
     },
 
     async handleVolontariSubmit() {
@@ -141,7 +174,7 @@ export default {
         console.log('Volontari Response:', data);
         // Reset form on success
         this.volontariFormData = {
-          name: "", surname: "", age: null, email: "", phone: "", password: ""
+          name: "", surname: "", age: null, email: "", phone: "", password: "",description : "",skills:[],experience:""
         };
       } catch (error) {
         console.error('Error submitting volontari form:', error);
@@ -172,55 +205,66 @@ export default {
         console.log('Associazioni Response:', data);
         // Reset form on success
         this.associazioniFormData = {
-          name: "", email: "", phone: "", password: ""
+          name: "", email: "", phone: "", password: "",description : "",objectives : ""
         };
       } catch (error) {
         console.error('Error submitting associazioni form:', error);
       }
-    }
-  },
+    },
+    addSkill() {
+      if (this.newSkill.trim() !== "") {
+        this.volontariFormData.skills.push(this.newSkill.trim());
+        this.newSkill = "";
+      }
+    },
+    removeSkill(index) {
+      this.volontariFormData.skills.splice(index, 1);
+    },
+  }
+  ,
+
 };
 </script>
-  <style scoped>
-  .registration-container {
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  .toggle-buttons {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .toggle-buttons button {
-    margin: 0 10px;
-    padding: 10px 15px;
-    background-color: #f0f0f0;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .toggle-buttons button.active {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
-    margin-top: 10px;
-  }
-  
-  input {
-    margin-bottom: 10px;
-    padding: 5px;
-  }
-  
-  button {
-    margin-top: 15px;
-  }
-  </style>
+<style scoped>
+.registration-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.toggle-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.toggle-buttons button {
+  margin: 0 10px;
+  padding: 10px 15px;
+  background-color: #f0f0f0;
+  border: none;
+  cursor: pointer;
+}
+
+.toggle-buttons button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 10px;
+}
+
+input {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+button {
+  margin-top: 15px;
+}
+</style>

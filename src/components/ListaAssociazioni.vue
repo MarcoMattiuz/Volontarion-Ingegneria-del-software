@@ -14,7 +14,7 @@ export default {
   methods: {
     getAssociazioni() {
       
-      fetch("http://localhost:3001/associazioni/getAssociazioni", {
+      fetch(getAssociazioniEndpoint, {
         method: 'Get',
       })
         .then((response) => {
