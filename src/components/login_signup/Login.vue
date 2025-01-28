@@ -1,9 +1,11 @@
 <script>
 import { LoginEndpointVolontario } from '@/endpoints';
+import { LoginEndpointAssociazione } from '@/endpoints';
 
 export default {
   data() {
     return {
+      endpoint: LoginEndpointVolontario,
       message: "sono associazione",
       tipo: "volontario",
       email: "",
@@ -23,8 +25,7 @@ export default {
       postData.append("password", this.password);
 
 
-      //aggiungere endpoint login associazione
-      fetch(LoginEndpointVolontario, {
+      fetch(this.endpoint, {
         method: 'POST',
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -52,10 +53,13 @@ export default {
       console.log(this.tipo+" "+this.message);
       if (this.tipo == "volontario") {
         this.tipo = "associazione";
+        this.endpoint = LoginEndpointAssociazione;
         this.message = "sono volontario";
       }
       else if (this.tipo == "associazione") {
         this.tipo = "volontario";
+        this.endpoint = LoginEndpointVolontario;
+
         this.message = "sono associazione";
       }
     }

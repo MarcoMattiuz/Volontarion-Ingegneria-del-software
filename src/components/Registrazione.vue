@@ -14,6 +14,7 @@
 
     <form v-if="currentForm === 'associazioni'" @submit.prevent="handleAssociazioniSubmit">
       <label for="name">Foto Profilo</label>
+      <img :src="associazioniFormData.profilePicture" v-if="associazioniFormData.profilePicture"/>
       <input type="file" @change="handleFileUpload" accept="image/*" />
       <label for="name">Name</label>
       <input type="text" v-model.trim="associazioniFormData.name" required>
@@ -34,12 +35,16 @@
       <label for="objectives">Obiettivi</label>
       <textarea v-model="associazioniFormData.objectives"></textarea>
 
+      <label for="subscriptionIter">SubscriptionIter</label>
+      <textarea v-model="associazioniFormData.subscriptionIter"></textarea>
+      
       <button class="btn btn-primary" type="submit">Registrati</button>
     </form>
 
 
     <form v-else @submit.prevent="handleVolontariSubmit">
       <label for="name">Foto Profilo</label>
+      <img :src="volontariFormData.profilePicture"v-if="associazioniFormData.profilePicture"/>
       <input type="file" @change="handleFileUpload" accept="image/*" />
 
       <label for="name">Name</label>
@@ -104,6 +109,7 @@ export default {
         password: "",
         description: "",
         objectives: "",
+        subscriptionIter :"",
       },
       volontariFormData: {
         profilePicture: "",
@@ -231,7 +237,7 @@ export default {
         console.log('Associazioni Response:', data);
         // Reset form on success
         this.associazioniFormData = {
-          name: "", email: "", phone: "", password: "", description: "", objectives: "",profilePicture :""
+          name: "", email: "", phone: "", password: "", description: "", objectives: "",profilePicture :"",subscriptionIter:""
         };
       } catch (error) {
         console.error('Error submitting associazioni form:', error);
