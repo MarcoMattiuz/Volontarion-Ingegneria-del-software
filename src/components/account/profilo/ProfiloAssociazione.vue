@@ -1,9 +1,15 @@
 <script>
 import { GetCurrentAssociazione } from '@/endpoints';
-
+import { CambioPasswordAssociazioneEndpoint } from '@/endpoints';
+import ChangePassword from './ChangePassword.vue';
 export default {
+    components:{
+        ChangePassword,
+    },
     data() {
         return {
+            showModalChangePassword : false,
+            CambioPasswordEndpoint : CambioPasswordAssociazioneEndpoint,
             profileData: []
         };
     },
@@ -47,6 +53,7 @@ export default {
                     <p>Cellulare : {{ this.profileData.phone }}</p>
                     <div class="card-actions justify-end">
                         <button class="btn btn-primary">Edit profile</button>
+                        <button class="btn btn-primary" @click="this.showModalChangePassword = true">Cambia password</button>
                     </div>
                 </div>
             </div>
@@ -71,8 +78,9 @@ export default {
         </div>
         
     </div>
-</template>
 
+    <ChangePassword v-if="showModalChangePassword" @close="showModalChangePassword = false;" :endpoint="CambioPasswordEndpoint"></ChangePassword>
+</template>
 <script>
 
 </script>

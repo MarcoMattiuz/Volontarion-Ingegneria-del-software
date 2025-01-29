@@ -2,7 +2,7 @@
     <div class="registration-container">  
       <form  @submit.prevent="handleVolontariSubmit">
         <label for="name">Foto Profilo</label>
-        <img :src="volontariFormData.profilePicture"v-if="associazioniFormData.profilePicture"/>
+        <img :src="this.volontariFormData.profilePicture"/>
         <input type="file" @change="handleFileUpload" accept="image/*" />
   
         <label for="name">Name</label>

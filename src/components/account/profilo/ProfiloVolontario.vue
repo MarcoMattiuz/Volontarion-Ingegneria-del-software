@@ -1,5 +1,90 @@
 <script>
 import { GetCurrentVolontario } from '@/endpoints';
+import { CambioPasswordVolontarioEndpoint } from '@/endpoints';
+import ChangePassword from './ChangePassword.vue';
+export default {
+    components:{
+        ChangePassword,
+    },
+    data() {
+        return {
+            showModalChangePassword : false,
+            CambioPasswordEndpoint : CambioPasswordVolontarioEndpoint,
+            profileData: [],
+        };
+    },
+    mounted() {
+        this.getDataProfilo();
+    },
+    methods: {
+        getDataProfilo() {
+            fetch(GetCurrentVolontario, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                credentials: "include",
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Response:", data);
+                    this.profileData = data;
+                })
+                .catch((error) => {
+                    console.error("Error:", error.message);
+                });
+        },
+    }
+};
+</script>
+
+<template>
+    <div class="grid grid-cols-3 gap-4">
+        <div class="col-span-3">
+            <div class="card card-side bg-base-100 shadow-xl">
+                <figure class="w-1/3 h-full">
+                    <img :src="profileData.profilePicture" alt="Profile Picture"/>
+                </figure>
+                <div class="card-body">
+                    <h2 class="card-title">{{ profileData.name }} {{ profileData.surname }}</h2>
+                    <p>Email: {{ profileData.email }}</p>
+                    <p>Cellulare: {{ profileData.phone }}</p>
+                    <div class="card-actions justify-end">
+                        <button class="btn btn-primary">Edit profile</button>
+                        <button class="btn btn-primary" @click="this.showModalChangePassword = true">Cambia password</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card card-side bg-base-100">
+            <div class="card-body">
+                <h2 class="card-title">Skills</h2>
+                <div v-for="(item, index) in this.profileData.skills" :key="index">
+                    {{ item }}
+                </div>
+            </div>
+        </div>
+        <div class="col-span-2 card card-side bg-base-100">
+            <div class="card-body">
+                <h2 class="card-title">Descrizione</h2>
+                {{ this.profileData.description }}
+            </div>
+        </div>
+        <div class="col-span-3 card card-side bg-base-100">
+            <div class="card-body">
+                <h2 class="card-title">Esperienza</h2>
+                {{ this.profileData.experience }}
+            </div>
+        </div>
+        
+        <ChangePassword v-if="showModalChangePassword" @close="showModalChangePassword = false;" :endpoint="CambioPasswordEndpoint"></ChangePassword>
+        
+    </div>
+</template>
+
+
+<!-- <script>
+import { GetCurrentVolontario } from '@/endpoints';
 
 export default {
     data() {
@@ -47,6 +132,7 @@ export default {
                     <p>Cellulare : {{ this.profileData.phone }}</p>
                     <div class="card-actions justify-end">
                         <button class="btn btn-primary">Edit profile</button>
+                        <button class="btn btn-primary">Cambia password</button>
                     </div>
                 </div>
             </div>
@@ -76,4 +162,4 @@ export default {
 
 <script>
 
-</script>
+</script> -->

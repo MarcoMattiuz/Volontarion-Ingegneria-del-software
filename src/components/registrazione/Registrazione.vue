@@ -26,7 +26,6 @@ export default {
   components: {
       RegistrazioneVolontario,
       RegistrazioneAssociazione
-        
   },
   data() {
     return {

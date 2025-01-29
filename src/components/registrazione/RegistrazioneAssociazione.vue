@@ -1,8 +1,8 @@
 <template>
     <div class="registration-container">  
-        <form v-if="currentForm === 'associazioni'" @submit.prevent="handleAssociazioniSubmit">
+        <form  @submit.prevent="handleAssociazioniSubmit">
       <label for="name">Foto Profilo</label>
-      <img :src="associazioniFormData.profilePicture" v-if="associazioniFormData.profilePicture"/>
+      <img :src="associazioniFormData.profilePicture"/>
       <input type="file" @change="handleFileUpload" accept="image/*" />
       <label for="name">Name</label>
       <input type="text" v-model.trim="associazioniFormData.name" required>
