@@ -41,10 +41,10 @@ export default {
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     <div v-for="(item, index) in this.Associazioni" :key="index" class="card w-96 bg-base-100 shadow-xl">
-      <figure><img :src="item.image" alt="Card image" /></figure>
+      <figure><img :src="item.profilePicture" alt="placeholder"/></figure>
       <div class="card-body">
         <h2 class="card-title">{{ item.name }}</h2>
-        <p>{{ item.email }}</p>
+        <p>12321</p>
         <div class="card-actions justify-end">
           <button class="btn btn-primary">visita</button>
         </div>
