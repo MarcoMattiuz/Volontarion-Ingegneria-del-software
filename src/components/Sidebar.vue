@@ -27,6 +27,12 @@
                                 <span>Profilo</span>
                             </a>
                         </li>
+                        <li v-if="tipo === 'associazione'">
+                            <a @click="redirectTo('/i_tuoi_eventi')">
+                                <font-awesome-icon icon="user" />
+                                <span>I tuoi eventi</span>
+                            </a>
+                        </li>
                     </div>
                 </ul>
             </li>
@@ -151,12 +157,23 @@ export default {
 
     data() {
         return {
-
+            tipo: localStorage.getItem('userType'),
             theme: 'gray-900',
             text: 'gray-200',
         }
     },
+    mounted() {
+        //update di tipe se userType è cambiato
+        window.addEventListener('userTypeChanged', (event) => {
+        this.tipo = event.detail.userType;
+  });
+    },
     methods: {
+        onStorageChange(event) {
+            if (event.key === 'userType') {
+                this.tipo = event.newValue;
+            }
+        },
         redirectTo(url) {
             this.$router.push(url);
         },

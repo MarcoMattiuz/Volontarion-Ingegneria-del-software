@@ -2,6 +2,7 @@
 const domain = "http://localhost:3001";
 const subdomainVolontari = "/users/";
 const subdomainAssociazioni = "/associazioni/";
+const subdomainEventi = "/events/";
 
 
 export const CheckLoggedinEndpoint = domain + subdomainVolontari +"checkLoggedIn";
@@ -23,4 +24,8 @@ export const getAssociazioniEndpoint = domain + subdomainAssociazioni +"getAssoc
 export const LoginEndpointAssociazione = domain + subdomainAssociazioni +"login";
 export const GetCurrentAssociazione = domain + subdomainAssociazioni +"getCurrentAssociazione";
 export const ModifyProfileAssociazione = domain + subdomainAssociazioni +"modifyProfile";
+
+
+export const CreaEventoEndpoint = domain + subdomainEventi +"creaEvento";
+
 

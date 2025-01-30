@@ -38,6 +38,12 @@ export default {
           //
           localStorage.setItem('userType', this.tipo);
           //
+          //crea evento che userType è cambiato
+          window.dispatchEvent(new CustomEvent('userTypeChanged', {
+            detail: {
+              userType: localStorage.getItem('userType')
+            }
+          }));
           console.log("Response:", data);
         })
         .catch((error) => {

@@ -5,6 +5,7 @@ import ListaAssociazioni from '@/components/ListaAssociazioni.vue'
 
 import Registrazione from '@/components/registrazione/Registrazione.vue'
 import Profilo from '@/components/account/profilo/Profilo.vue'
+import ITuoiEventi from '@/components/eventi/ITuoiEventi.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,11 @@ const router = createRouter({
       path: '/profilo',
       name: 'profilo',
       component: Profilo,
+    },
+    {
+      path: '/i_tuoi_eventi',
+      name: 'eventi dell associazione',
+      component: ITuoiEventi,
     },
 
     /*{
