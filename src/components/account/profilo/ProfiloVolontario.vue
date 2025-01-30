@@ -2,13 +2,16 @@
 import { GetCurrentVolontario } from '@/endpoints';
 import { CambioPasswordVolontarioEndpoint } from '@/endpoints';
 import ChangePassword from './ChangePassword.vue';
+import EditProfileVolontario from './EditProfileVolontario.vue';
 export default {
     components:{
         ChangePassword,
+        EditProfileVolontario,
     },
     data() {
         return {
             showModalChangePassword : false,
+            showModalEditProfileVolontario : false,
             CambioPasswordEndpoint : CambioPasswordVolontarioEndpoint,
             profileData: [],
         };
@@ -50,8 +53,8 @@ export default {
                     <p>Email: {{ profileData.email }}</p>
                     <p>Cellulare: {{ profileData.phone }}</p>
                     <div class="card-actions justify-end">
-                        <button class="btn btn-primary">Edit profile</button>
-                        <button class="btn btn-primary" @click="this.showModalChangePassword = true">Cambia password</button>
+                        <button class="btn btn-primary" @click="this.showModalEditProfileVolontario = true;">Edit profile</button>
+                        <button class="btn btn-primary" @click="this.showModalChangePassword = true;this.getDataProfilo()">Cambia password</button>
                     </div>
                 </div>
             </div>
@@ -75,9 +78,10 @@ export default {
                 <h2 class="card-title">Esperienza</h2>
                 {{ this.profileData.experience }}
             </div>
-        </div>
+        </div> 
         
         <ChangePassword v-if="showModalChangePassword" @close="showModalChangePassword = false;" :endpoint="CambioPasswordEndpoint"></ChangePassword>
+        <EditProfileVolontario  v-if="showModalEditProfileVolontario" @close="showModalEditProfileVolontario = false;" :profileData="profileData"></EditProfileVolontario>
         
     </div>
 </template>

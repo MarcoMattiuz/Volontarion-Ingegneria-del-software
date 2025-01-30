@@ -16,8 +16,11 @@ export const RegistrazioneAssociazioneEndpoint =domain + subdomainAssociazioni +
 export const GetProfilePictureEndpoint = domain + subdomainVolontari +"getProfilePicture";
 export const DeleteAccountEndpoint = domain + subdomainVolontari +"deleteAccount";
 export const GetCurrentVolontario = domain + subdomainVolontari +"getCurrentVolontario";
+export const ModifyProfileVolontario = domain + subdomainVolontari +"modifyProfile";
 
 export const CambioPasswordAssociazioneEndpoint = domain + subdomainAssociazioni+"changePassword";
 export const getAssociazioniEndpoint = domain + subdomainAssociazioni +"getAssociazioni";
 export const LoginEndpointAssociazione = domain + subdomainAssociazioni +"login";
 export const GetCurrentAssociazione = domain + subdomainAssociazioni +"getCurrentAssociazione";
+export const ModifyProfileAssociazione = domain + subdomainAssociazioni +"modifyProfile";
+

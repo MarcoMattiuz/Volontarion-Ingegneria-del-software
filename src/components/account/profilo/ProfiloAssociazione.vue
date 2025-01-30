@@ -2,13 +2,16 @@
 import { GetCurrentAssociazione } from '@/endpoints';
 import { CambioPasswordAssociazioneEndpoint } from '@/endpoints';
 import ChangePassword from './ChangePassword.vue';
+import EditProfileAssociazione from './EditProfileAssociazione.vue';
 export default {
     components:{
         ChangePassword,
+        EditProfileAssociazione,
     },
     data() {
         return {
             showModalChangePassword : false,
+            showModalEditProfileAssociazione : false,
             CambioPasswordEndpoint : CambioPasswordAssociazioneEndpoint,
             profileData: []
         };
@@ -52,7 +55,7 @@ export default {
                     <p>Email : {{ this.profileData.email }}</p>
                     <p>Cellulare : {{ this.profileData.phone }}</p>
                     <div class="card-actions justify-end">
-                        <button class="btn btn-primary">Edit profile</button>
+                        <button class="btn btn-primary"@click="this.showModalEditProfileAssociazione = true" >Edit profile</button>
                         <button class="btn btn-primary" @click="this.showModalChangePassword = true">Cambia password</button>
                     </div>
                 </div>
@@ -80,6 +83,7 @@ export default {
     </div>
 
     <ChangePassword v-if="showModalChangePassword" @close="showModalChangePassword = false;" :endpoint="CambioPasswordEndpoint"></ChangePassword>
+    <EditProfileAssociazione  v-if="showModalEditProfileAssociazione" @close="showModalEditProfileAssociazione = false;this.getDataProfilo()" :profileData="profileData"></EditProfileAssociazione>
 </template>
 <script>
 
