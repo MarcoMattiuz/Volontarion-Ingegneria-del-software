@@ -1,5 +1,5 @@
 <script>
-import { CreaEventoEndpoint } from '@/endpoints';
+import { CreateEventEndpoint } from '@/endpoints';
 
 export default {
     data() {
@@ -42,25 +42,31 @@ export default {
         CreaEvento() {
             const startDateObject = new Date(this.startDateTime);
             const endDateObject = new Date(this.endDateTime);
-
-            fetch(CreaEventoEndpoint, {
+            const eventData = {
+                name: this.name,
+                startDateTime: startDateObject,
+                endDateTime: endDateObject,
+                place: this.place,
+                description: this.description,
+                picture: this.picture,
+            };
+            fetch(CreateEventEndpoint, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
                 },
                 credentials: "include",
-                body: JSON.stringify({
-                    name: this.name,
-                    startDateTime: startDateObject,
-                    endDateTime: endDateObject,
-                    place: this.place,
-                    description: this.description,
-                }),
+                body: JSON.stringify(eventData),
             })
                 .then(response => response.json())
                 .then(data => {
                     if (data.response) {
                         alert("Evento creato!");
+                        window.dispatchEvent(new CustomEvent('event_created', {
+                            detail: {
+                                newEvent: eventData
+                            }
+                        }));
                         this.closeModal();
                     }
                 })
@@ -82,9 +88,7 @@ export default {
                 <!-- Picture -->
                 <div class="flex flex-col items-center space-y-2">
                     <label for="picture" class="text-white">Foto Profilo</label>
-                    <img :src="picture"
-                        class=" object-cover mx-auto"
-                        alt="Profile Picture" />
+                    <img :src="picture" class=" object-cover mx-auto" alt="Profile Picture" />
                     <input type="file" @change="handleFileUpload" accept="image/*" class="mt-2" />
                 </div>
 

@@ -163,7 +163,7 @@ export default {
         }
     },
     mounted() {
-        //update di tipe se userType è cambiato
+        //update di tipe se userType è cambiato (da Login)
         window.addEventListener('userTypeChanged', (event) => {
         this.tipo = event.detail.userType;
   });
