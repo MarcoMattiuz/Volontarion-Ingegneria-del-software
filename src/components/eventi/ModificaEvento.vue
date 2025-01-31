@@ -1,73 +1,65 @@
 <script>
-import { CreateEventEndpoint } from '@/endpoints';
-
+import { ModifyEventEndpoint } from '@/endpoints';
 export default {
+    props: {
+        eventData: Object,
+    },
+    mounted() {
+        this.init();
+    },
     data() {
         return {
-            name: "",
-            picture: "",
-            startDateTime: "",
-            endDateTime: "",
-            place: "",
-            description: "",
+            newData: {},
+
         };
     },
     methods: {
-        handleFileUpload(event) {
-            const file = event.target.files[0];
-
-            if (file) {
-                const reader = new FileReader();
-
-                reader.onload = () => {
-                    const base64String = reader.result;
-
-                    this.picture = base64String;
-                }
-                reader.readAsDataURL(file);
-            }
-        },
-
         closeModal() {
-            this.picture = "";
-            this.name = '';
-            this.startDateTime = '';
-            this.endDateTime = '';
-            this.place = '';
-            this.description = "";
 
-            //notifica parent di cambiare stato
+            this.newData = {};
             this.$emit("close");
         },
-        CreaEvento() {
-            const eventData = {
-                name: this.name,
-                startDateTime: this.startDateTime,
-                endDateTime: this.endDateTime,
-                place: this.place,
-                description: this.description,
-                picture: this.picture,
-            };
-            fetch(CreateEventEndpoint, {
+        async editEvento() {
+            var data = {};
+            for (const key in this.newData) {
+                if (JSON.stringify(this.newData[key]) !== JSON.stringify(this.eventData[key])) {
+                    data[key] = this.newData[key];
+                }
+            }
+            data["_id"] = this.newData["_id"];
+            console.log();
+            if (Object.keys(data).length === 0) {
+                console.log("nessuna modifica");
+                return;
+            }
+            fetch(ModifyEventEndpoint, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
                 },
                 credentials: "include",
-                body: JSON.stringify(eventData),
+                body: JSON.stringify({ "data": data })
             })
                 .then(response => response.json())
                 .then(data => {
                     if (data.response) {
-                        alert("Evento creato!");
+                        alert("Evento cambiato");
                         window.dispatchEvent(new CustomEvent('update'));
                         this.closeModal();
+                    } else {
+                        this.errorMessage = data.error || "Errore edit Evento";
                     }
                 })
                 .catch(error => {
                     console.error("Error:", error);
+                    this.errorMessage = "Network error.";
                 });
-        }
+        },
+
+        init() {
+            this.newData = JSON.parse(JSON.stringify(this.eventData));
+        },
+
     }
 };
 </script>
@@ -82,40 +74,40 @@ export default {
                 <!-- Picture -->
                 <div class="flex flex-col items-center space-y-2">
                     <label for="picture" class="text-white">Foto Profilo</label>
-                    <img :src="picture" class=" object-cover mx-auto" alt="Profile Picture" />
+                    <img :src="newData.picture" class=" object-cover mx-auto" alt="Profile Picture" />
                     <input type="file" @change="handleFileUpload" accept="image/*" class="mt-2" />
                 </div>
 
                 <!-- Name -->
                 <div class="w-full sm:w-3/4 md:w-1/2">
                     <label for="name" class="text-white">Nome</label>
-                    <input type="text" v-model.trim="name" required
+                    <input type="text" v-model.trim="newData.name" required
                         class="w-full p-2 mt-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500" />
                 </div>
 
                 <!-- startDateTime -->
                 <div class="w-full sm:w-3/4 md:w-1/2">
                     <label for="startDateTime" class="text-white">Data e tempo di inizio</label>
-                    <input type="datetime-local" v-model.trim="startDateTime" required
+                    <input type="datetime-local" v-model.trim="newData.startDateTime" required
                         class="w-full p-2 mt-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500" />
                 </div>
 
                 <!-- startDateTime -->
                 <div class="w-full sm:w-3/4 md:w-1/2">
                     <label for="endDateTime" class="text-white">Data e tempo di fine</label>
-                    <input type="datetime-local" v-model.trim="endDateTime" required
+                    <input type="datetime-local" v-model.trim="newData.endDateTime" required
                         class="w-full p-2 mt-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500" />
                 </div>
 
                 <div class="w-full sm:w-3/4 md:w-1/2">
                     <label for="place" class="text-white">Luogo</label>
-                    <input type="text" v-model="place" required
+                    <input type="text" v-model="newData.place" required
                         class="w-full p-2 mt-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500"></input>
                 </div>
                 <!-- Description -->
                 <div class="w-full sm:w-3/4 md:w-1/2">
                     <label for="description" class="text-white">Descrizione</label>
-                    <textarea v-model="description"
+                    <textarea v-model="newData.description"
                         class="w-full p-2 mt-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500"></textarea>
                 </div>
 
@@ -124,8 +116,8 @@ export default {
                     <button class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600" @click="closeModal">
                         Annulla
                     </button>
-                    <button class="bg-teal-500 text-white px-4 py-2 rounded-md hover:bg-teal-600" @click="CreaEvento">
-                        Crea
+                    <button class="bg-teal-500 text-white px-4 py-2 rounded-md hover:bg-teal-600" @click="editEvento">
+                        Modifica
                     </button>
                 </div>
             </div>

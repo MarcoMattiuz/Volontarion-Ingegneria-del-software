@@ -1,14 +1,18 @@
 <script>
 import CreaEvento from './CreaEvento.vue';
 import { GetMyEventiEndpoint, DeleteEventEndpoint } from '@/endpoints';
-
+import ModificaEvento from './ModificaEvento.vue';
+import { toRaw } from 'vue';
 export default {
     components: {
-        CreaEvento,
+        CreaEvento, ModificaEvento
     },
     data() {
         return {
             showModalCreaEvento: false,
+            showModalModificaEvento: false,
+            editEventId : "",
+            editEventData : {},
             eventi: [],
         };
     },
@@ -36,24 +40,28 @@ export default {
                     console.error("Error fetching events:", error.message);
                 });
         },
-
+        handle(eventId, data){
+            this.editEventId = eventId;
+            this.showModalModificaEvento = true
+            this.editEventData = JSON.parse(JSON.stringify(data))
+        },
         async deleteEvent(eventId) {
             fetch(DeleteEventEndpoint, {
                 method: 'DELETE',
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body :  JSON.stringify({"eventId" : eventId}),
+                body: JSON.stringify({ "eventId": eventId }),
                 credentials: "include",
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    if(data.response == "ok"){
+                    if (data.response == "ok") {
                         alert("Evento eliminato");
                         this.getEventi();
                     }
-                    
-                    if(data.error){
+
+                    if (data.error) {
                         this.getEventi();
                     }
                 })
@@ -61,6 +69,7 @@ export default {
                     console.error("Error fetching events:", error.message);
                 });
         },
+        
     }
 }
 </script>
@@ -87,13 +96,21 @@ export default {
                     <p class="text-gray-500"><strong>endDateTime:</strong> {{ event.endDateTime }}</p>
                     <p class="text-gray-500"><strong>Location:</strong> {{ event.place }}</p>
                     <button class="btn btn-danger mt-4" @click="deleteEvent(event._id)">
-                        ❌ Delete Event {{event._id}}
+                        ❌ Elimina Evento
+                    </button>
+                    <button class="btn btn-danger mt-4" @click="handle(event._id,event)">
+                        ✏️ Modifica evento
                     </button>
                 </div>
 
-            </div>
+               
         </div>
-
+        </div>
         <p v-else class="text-gray-500 text-center mt-4">No events found.</p>
+         <!-- Event edit modal -->
+         <ModificaEvento  v-if="showModalModificaEvento" @close="showModalModificaEvento = false;" :eventId = "editEventId" :eventData="editEventData"></ModificaEvento>
+
+
+        
     </div>
 </template>
