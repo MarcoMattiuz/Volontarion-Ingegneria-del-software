@@ -62,11 +62,7 @@ export default {
                 .then(data => {
                     if (data.response) {
                         alert("Evento creato!");
-                        window.dispatchEvent(new CustomEvent('event_created', {
-                            detail: {
-                                newEvent: eventData
-                            }
-                        }));
+                        window.dispatchEvent(new CustomEvent('update'));
                         this.closeModal();
                     }
                 })

@@ -1,6 +1,6 @@
 <script>
 import CreaEvento from './CreaEvento.vue';
-import { GetMyEventiEndpoint, CreateEventEndpoint } from '@/endpoints';
+import { GetMyEventiEndpoint, DeleteEventEndpoint } from '@/endpoints';
 
 export default {
     components: {
@@ -14,26 +14,52 @@ export default {
     },
     mounted() {
         this.getEventi();
-        window.addEventListener('event_created', (event) => {
-            this.eventi.push(event.detail.newEvent)
+        window.addEventListener('update', (event) => {
+            this.getEventi()
         });
     },
     methods: {
         async getEventi() {
-            try {
-                const response = await fetch(GetMyEventiEndpoint, {
-                    method: 'GET',
-                    credentials: "include",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
+            fetch(GetMyEventiEndpoint, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                credentials: "include",
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Eventi:", data);
+                    this.eventi = data;
+                })
+                .catch((error) => {
+                    console.error("Error fetching events:", error.message);
                 });
-                if (!response.response) console.log('Failed to fetch events');
-                this.eventi = await response.json();
-                console.log('Eventi:', this.eventi);
-            } catch (error) {
-                console.error('Error fetching events:', error);
-            }
+        },
+
+        async deleteEvent(eventId) {
+            fetch(DeleteEventEndpoint, {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body :  JSON.stringify({"eventId" : eventId}),
+                credentials: "include",
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if(data.response == "ok"){
+                        alert("Evento eliminato");
+                        this.getEventi();
+                    }
+                    
+                    if(data.error){
+                        this.getEventi();
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error fetching events:", error.message);
+                });
         },
     }
 }
@@ -54,19 +80,20 @@ export default {
         <!-- Event list -->
         <div v-if="eventi.length > 0 && showModalCreaEvento == false" class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div v-for="event in eventi" :key="event.id" class="card bg-base-100 shadow-md p-4 border rounded-lg">
-                <figure><img :src="event.picture" alt="placeholder"/></figure>
+                <figure><img :src="event.picture" alt="placeholder" /></figure>
                 <div class="card-body">
-                    <h3 class="card-title text-lg font-semibold">{{  event.name }}</h3>
+                    <h3 class="card-title text-lg font-semibold">{{ event.name }}</h3>
                     <p class="text-gray-500"><strong>startDateTime:</strong> {{ event.startDateTime }}</p>
                     <p class="text-gray-500"><strong>endDateTime:</strong> {{ event.endDateTime }}</p>
                     <p class="text-gray-500"><strong>Location:</strong> {{ event.place }}</p>
+                    <button class="btn btn-danger mt-4" @click="deleteEvent(event._id)">
+                        ❌ Delete Event {{event._id}}
+                    </button>
                 </div>
-                
+
             </div>
         </div>
 
         <p v-else class="text-gray-500 text-center mt-4">No events found.</p>
     </div>
 </template>
-
-
