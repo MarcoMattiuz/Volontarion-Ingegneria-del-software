@@ -34,9 +34,9 @@
                             </a>
                         </li>
                         <li v-if="tipo">
-                            <a @click="redirectTo('/i_tuoi_eventi')">
+                            <a @click="redirectTo('/i_miei_eventi')">
                                 <font-awesome-icon icon="user" />
-                                <span>I tuoi eventi</span>
+                                <span>I miei eventi</span>
                             </a>
                         </li>
                     </div>

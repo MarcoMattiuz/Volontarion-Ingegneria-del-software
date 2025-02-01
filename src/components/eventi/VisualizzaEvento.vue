@@ -1,5 +1,5 @@
 <script>
-import { GetEventEndpoint } from '@/endpoints';
+import { GetEventEndpoint,subscribeEventEndpoint } from '@/endpoints';
 import { formattedDateTime } from '../util/formattedDateTime';
 export default {
     props: ['id'],
@@ -30,6 +30,25 @@ export default {
                 .then((data) => {
                     console.log("Event:", data);
                     this.event = data;
+                })
+                .catch((error) => {
+                    console.error("Error fetching event:", error.message);
+                });
+        },
+        async subscribeEvent() {
+            fetch(subscribeEventEndpoint, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials:'include',
+                body : JSON.stringify({ id: this.event._id }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if(data.response){
+                        alert("iscritto");
+                    }
                 })
                 .catch((error) => {
                     console.error("Error fetching event:", error.message);
@@ -86,7 +105,7 @@ export default {
                     <!-- Action Buttons -->
                     <div v-if="tipo === 'volontario'" class="flex justify-center space-x-4 mt-6">
                         
-                        <button class="btn btn-outline">Iscriviti</button>
+                        <button class="btn btn-outline" @click="subscribeEvent">Iscriviti</button>
                     </div>
                 </div>
             </div>

@@ -1,11 +1,11 @@
 <script>
 import CreaEvento from './CreaEvento.vue';
-import { GetMyEventiEndpoint, DeleteEventEndpoint } from '@/endpoints';
+import { GetMyEventiAssociazioneEndpoint, DeleteEventEndpoint } from '@/endpoints';
 import ModificaEvento from './ModificaEvento.vue';
 import { toRaw } from 'vue';
 export default {
     components: {
-        
+        CreaEvento, ModificaEvento
     },
     data() {
         return {
@@ -24,7 +24,7 @@ export default {
     },
     methods: {
         async getEventi() {
-            fetch(GetMyEventiEndpoint, {
+            fetch(GetMyEventiAssociazioneEndpoint, {
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",

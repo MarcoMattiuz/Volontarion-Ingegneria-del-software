@@ -5,7 +5,7 @@ import ListaAssociazioni from '@/components/ListaAssociazioni.vue'
 
 import Registrazione from '@/components/registrazione/Registrazione.vue'
 import Profilo from '@/components/account/profilo/Profilo.vue'
-import ITuoiEventi from '@/components/eventi/ITuoiEventi.vue'
+import IMieiEventi from '@/components/eventi/IMieiEventi.vue'
 import ListaEventi from '@/components/eventi/ListaEventi.vue'
 import VisualizzaEvento from '@/components/eventi/VisualizzaEvento.vue'
 
@@ -43,9 +43,9 @@ const router = createRouter({
       component: Profilo,
     },
     {
-      path: '/i_tuoi_eventi',
+      path: '/i_miei_eventi',
       name: 'eventi dell utente',
-      component: ITuoiEventi,
+      component: IMieiEventi,
     },
     {
       path: '/eventi',
