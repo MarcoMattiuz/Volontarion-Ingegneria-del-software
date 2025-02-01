@@ -25,8 +25,9 @@ export const LoginEndpointAssociazione = domain + subdomainAssociazioni +"login"
 export const GetCurrentAssociazione = domain + subdomainAssociazioni +"getCurrentAssociazione";
 export const ModifyProfileAssociazione = domain + subdomainAssociazioni +"modifyProfile";
 
-
 export const CreateEventEndpoint = domain + subdomainEventi +"creaEvento";
+export const GetEventiEndpoint = domain + subdomainEventi +"getEventi";
+export const GetEventEndpoint = domain + subdomainEventi +"getEvent";
 export const GetMyEventiEndpoint = domain + subdomainEventi +"getMyEventi";
 export const DeleteEventEndpoint = domain + subdomainEventi +"deleteEvent";
 export const ModifyEventEndpoint = domain + subdomainEventi +"modifyEvent";

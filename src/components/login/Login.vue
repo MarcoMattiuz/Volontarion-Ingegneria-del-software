@@ -36,12 +36,12 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           //
-          localStorage.setItem('userType', this.tipo);
+          sessionStorage.setItem('userType', this.tipo);
           //
           //crea evento che userType è cambiato
           window.dispatchEvent(new CustomEvent('userTypeChanged', {
             detail: {
-              userType: localStorage.getItem('userType')
+              userType: sessionStorage.getItem('userType')
             }
           }));
           console.log("Response:", data);

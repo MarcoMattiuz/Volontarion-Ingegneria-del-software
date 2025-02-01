@@ -8,6 +8,12 @@
                 </button>
             </li>
             <li class="active">
+                <a @click="redirectTo('/eventi')">
+                    <font-awesome-icon icon="home" />
+                    <span>Eventi</span>
+                </a>
+            </li>
+            <li class="active">
                 <a @click="redirectTo('/')">
                     <font-awesome-icon icon="home" />
                     <span>Home</span>
@@ -21,13 +27,13 @@
                 </button>
                 <ul class="sub-menu">
                     <div>
-                        <li>
+                        <li v-if="tipo">
                             <a @click="redirectTo('/profilo')">
                                 <font-awesome-icon icon="user" />
                                 <span>Profilo</span>
                             </a>
                         </li>
-                        <li v-if="tipo === 'associazione'">
+                        <li v-if="tipo">
                             <a @click="redirectTo('/i_tuoi_eventi')">
                                 <font-awesome-icon icon="user" />
                                 <span>I tuoi eventi</span>
@@ -157,7 +163,7 @@ export default {
 
     data() {
         return {
-            tipo: localStorage.getItem('userType'),
+            tipo: sessionStorage.getItem('userType'),
             theme: 'gray-900',
             text: 'gray-200',
         }

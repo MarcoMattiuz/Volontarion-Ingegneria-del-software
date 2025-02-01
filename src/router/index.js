@@ -6,6 +6,8 @@ import ListaAssociazioni from '@/components/ListaAssociazioni.vue'
 import Registrazione from '@/components/registrazione/Registrazione.vue'
 import Profilo from '@/components/account/profilo/Profilo.vue'
 import ITuoiEventi from '@/components/eventi/ITuoiEventi.vue'
+import ListaEventi from '@/components/eventi/ListaEventi.vue'
+import VisualizzaEvento from '@/components/eventi/VisualizzaEvento.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -42,10 +44,20 @@ const router = createRouter({
     },
     {
       path: '/i_tuoi_eventi',
-      name: 'eventi dell associazione',
+      name: 'eventi dell utente',
       component: ITuoiEventi,
     },
-
+    {
+      path: '/eventi',
+      name: 'eventi',
+      component: ListaEventi,
+    },
+    {
+      path: '/evento/:id',
+      name: 'Evento',
+      component: VisualizzaEvento,
+      props: true // Pass route params as props
+  }
     /*{
       path: '/about',
       name: 'about',
