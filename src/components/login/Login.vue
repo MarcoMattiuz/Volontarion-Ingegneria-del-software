@@ -72,19 +72,22 @@ export default {
 
 <template>
   <div class="login-container">
-    <p>login {{ this.tipo }}</p>
+    <p class="login-title">login {{ this.tipo }}</p>
     <form class="login-form" @submit.prevent="handleSubmit" method="POST">
       <label for="email">Email</label>
       <input class="containter" type="email" v-model="email" required />
-
       <label for="password">Password</label>
       <input class="containter" type="password" v-model="password" required />
-      <button class="btn btn-primary" type="submit">Login</button>
+      <button class="btn btn-primary" type="submit" style="margin-bottom: 10px">
+        Login
+      </button>
       <button @click="toggle" type="button" class="btn btn-primary">
         {{ this.message }}
       </button>
     </form>
-    <a @click="redirectTo('/registrazione')">Non sei registrato?</a>
+    <a @click="redirectTo('/registrazione')" class="link-register"
+      >Non sei registrato?</a
+    >
   </div>
 </template>
 
