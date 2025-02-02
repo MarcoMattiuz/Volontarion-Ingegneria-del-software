@@ -11,7 +11,7 @@ export default {
       submitted: false, // Track if the form was submitted
     };
   },
-
+  components: {},
   methods: {
     handleSubmit() {
       console.log("Email:", this.email);
@@ -43,22 +43,37 @@ export default {
 
       console.log(document.cookie);
     },
-
-    toggle() {
-      console.log(this.tipo + " " + this.message);
-      if (this.tipo == "volontario") {
-        this.tipo = "associazione";
-        this.message = "sono volontario";
-      } else if (this.tipo == "associazione") {
-        this.tipo = "volontario";
-        this.message = "sono associazione";
-      }
+    redirectTo(url) {
+      this.$router.push(url);
     },
+  },
+
+  toggle() {
+    console.log(this.tipo + " " + this.message);
+    if (this.tipo == "volontario") {
+      this.tipo = "associazione";
+      this.message = "sono volontario";
+    } else if (this.tipo == "associazione") {
+      this.tipo = "volontario";
+      this.message = "sono associazione";
+    }
   },
 };
 </script>
 
 <template>
+  <div class="login-container">
+    <form class="login-form" @submit.prevent="handleSubmit" method="POST">
+      <label for="email">Email</label>
+      <input class="containter" type="email" v-model="email" required />
+
+      <label for="password">Password</label>
+      <input class="containter" type="password" v-model="password" required />
+      <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+    <a @click="redirectTo('/registrazione')">Non sei registrato?</a>
+  </div>
+
   <p>login {{ tipo }}</p>
   <form @submit.prevent="handleSubmit" method="POST">
     <label for="email">Email</label>

@@ -8,15 +8,32 @@ import Sidebar from './components/Sidebar.vue'
 </script>
 
 <template>
-  <div class ="flex" >
-    <!-- Sidebar -->
-    <Sidebar class ="bg-primary w-16 flex-none"></Sidebar>
-    
-    <!-- Main Content -->
-    <div class="bg-primary-content pl-36 p-20 flex-auto">
+  <div class="app">
+    <Sidebar></Sidebar>
+    <main class="routerview">
       <RouterView></RouterView>
-    </div>
+    </main>
+      
+    
+  
   </div>
+  
+  
+  
+  
+  
+  <!--
+  <RegistrazioneVolontario></RegistrazioneVolontario>
+  <br>
+  <br>
+  <br>
+  <Login></Login>
+  <br>
+  <ImageUpload></ImageUpload>
+  <GetProfilePicture></GetProfilePicture>
+  <DeleteAccount></DeleteAccount>
+  -->
+  
 </template>
 
 
