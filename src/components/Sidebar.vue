@@ -8,6 +8,12 @@
         </button>
       </li>
       <li class="active">
+        <a @click="redirectTo('/eventi')">
+          <font-awesome-icon icon="home" />
+          <span>Eventi</span>
+        </a>
+      </li>
+      <li class="active">
         <a @click="redirectTo('/')">
           <font-awesome-icon icon="home" />
           <span>Home</span>
@@ -21,20 +27,39 @@
         </button>
         <ul class="sub-menu">
           <div>
-            <li>
-              <a @click="redirectTo('/login')">
+            <li v-if="tipo">
+              <a @click="redirectTo('/profilo')">
                 <font-awesome-icon icon="user" />
-                <span> Area utente </span>
+                <span>Profilo</span>
               </a>
             </li>
-            <li>
-              <a @click="redirectTo('/login')">
+            <li v-if="tipo">
+              <a @click="redirectTo('/i_miei_eventi')">
                 <font-awesome-icon icon="user" />
-                <span> Area utente </span>
+                <span>I miei eventi</span>
               </a>
             </li>
           </div>
         </ul>
+      </li>
+      <li class="active">
+        <a @click="redirectTo('/login')">
+          <font-awesome-icon icon="fa-right-to-bracket" />
+          <span>Login</span>
+        </a>
+      </li>
+      <li class="active"></li>
+      <li class="active">
+        <a @click="redirectTo('/listaAssociazioni')">
+          <font-awesome-icon icon="spinner" />
+          <span>Lista associazioni</span>
+        </a>
+      </li>
+      <li class="active">
+        <a @click="redirectTo('/registrazioneAssociazione')">
+          <font-awesome-icon icon="spinner" />
+          <span>registrazioneAssociazione</span>
+        </a>
       </li>
     </ul>
   </aside>
@@ -129,11 +154,23 @@
 export default {
   data() {
     return {
+      tipo: sessionStorage.getItem("userType"),
       theme: "gray-900",
       text: "gray-200",
     };
   },
+  mounted() {
+    //update di tipe se userType è cambiato (da Login)
+    window.addEventListener("userTypeChanged", (event) => {
+      this.tipo = event.detail.userType;
+    });
+  },
   methods: {
+    onStorageChange(event) {
+      if (event.key === "userType") {
+        this.tipo = event.newValue;
+      }
+    },
     redirectTo(url) {
       this.$router.push(url);
     },

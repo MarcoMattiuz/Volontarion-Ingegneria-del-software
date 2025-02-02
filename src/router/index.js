@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "@/components/HomeView.vue";
-import Home from "@/components/Home.vue";
-import Login from "@/components/login_signup/Login.vue";
-import ImageUpload from "@/components/util/ImageUpload.vue";
-import Lista_Associazioni from "@/components/ListaAssociazioni.vue";
-import RegistrazioneAssociazione from "@/components/login_signup/RegistrazioneAssociazione.vue";
-import Registrazione from "@/components/Registrazione.vue";
-import Profilo from "@/components/account/Profilo.vue";
+import Login from "@/components/login/Login.vue";
+import ListaAssociazioni from "@/components/ListaAssociazioni.vue";
+
+import Registrazione from "@/components/registrazione/Registrazione.vue";
+import Profilo from "@/components/account/profilo/Profilo.vue";
+import IMieiEventi from "@/components/eventi/IMieiEventi.vue";
+import ListaEventi from "@/components/eventi/ListaEventi.vue";
+import VisualizzaEvento from "@/components/eventi/VisualizzaEvento.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,20 +22,15 @@ const router = createRouter({
       name: "login",
       component: Login,
     },
-    {
-      path: "/imageupload",
-      name: "imageupload",
-      component: ImageUpload,
-    },
-    {
-      path: "/home",
-      name: "casa",
+    /* {
+      path: '/home',
+      name: 'casa',
       component: Home,
-    },
+    }, */
     {
-      path: "/associazioni",
+      path: "/listaAssociazioni",
       name: "lista_associazioni",
-      component: Lista_Associazioni,
+      component: ListaAssociazioni,
     },
     {
       path: "/registrazione",
@@ -42,16 +38,26 @@ const router = createRouter({
       component: Registrazione,
     },
     {
-      path: "/registrazioneAssociazione",
-      name: "registrazioneAssociazione",
-      component: RegistrazioneAssociazione,
-    },
-    {
       path: "/profilo",
       name: "profilo",
       component: Profilo,
     },
-
+    {
+      path: "/i_miei_eventi",
+      name: "eventi dell utente",
+      component: IMieiEventi,
+    },
+    {
+      path: "/eventi",
+      name: "eventi",
+      component: ListaEventi,
+    },
+    {
+      path: "/evento/:id",
+      name: "Evento",
+      component: VisualizzaEvento,
+      props: true, // Pass route params as props
+    },
     /*{
       path: '/about',
       name: 'about',
