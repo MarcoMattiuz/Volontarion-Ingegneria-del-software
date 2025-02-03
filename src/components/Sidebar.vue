@@ -14,6 +14,12 @@
         </a>
       </li>
       <li class="active">
+        <a @click="redirectTo('/eventiAssociazioniIscritte')">
+          <font-awesome-icon icon="home" />
+          <span>Eventi associazioni iscritte</span>
+        </a>
+      </li>
+      <li class="active">
         <a @click="redirectTo('/')">
           <font-awesome-icon icon="home" />
           <span>Home</span>

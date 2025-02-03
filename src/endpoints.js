@@ -34,6 +34,9 @@ export const GetEventEndpoint = domain + subdomainEventi +"getEvent";
 export const GetMyEventiAssociazioneEndpoint = domain + subdomainEventi +"getMyEventiAssociazione";
 export const GetMyEventiAssociazioneVolontario = domain + subdomainEventi +"getMyEventiVolontario";
 export const unsubscribeEventEndpoint = domain + subdomainEventi +"unsubscribeEvent";
+export const GetMyEventiAssociazioniIscritte = domain + subdomainEventi +"eventiAssociazioniIscritte";
+
+
 
 export const subscribeEventEndpoint = domain + subdomainEventi +"subscribeEvent";
 export const DeleteEventEndpoint = domain + subdomainEventi +"deleteEvent";

@@ -9,6 +9,7 @@ import IMieiEventi from "@/components/eventi/IMieiEventi.vue";
 import ListaEventi from "@/components/eventi/ListaEventi.vue";
 import VisualizzaEvento from "@/components/eventi/VisualizzaEvento.vue";
 import VisualizzaAssociazione from "@/components/account/VisualizzaAssociazione.vue";
+import EventiAssociazioniIscritte from "@/components/eventi/EventiAssociazioniIscritte.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -49,9 +50,14 @@ const router = createRouter({
       component: IMieiEventi,
     },
     {
-      path: "/eventi",
+      path: '/eventi',
       name: "eventi",
       component: ListaEventi,
+    },
+    {
+      path: "/eventiAssociazioniIscritte",
+      name: "eventiAssociazioniIscritte",
+      component: EventiAssociazioniIscritte,
     },
     {
       path: "/evento/:id",
