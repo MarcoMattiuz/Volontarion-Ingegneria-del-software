@@ -43,9 +43,8 @@ export default {
       <figure><img :src="item.profilePicture" alt="placeholder" /></figure>
       <div class="card-body">
         <h2 class="card-title">{{ item.name }}</h2>
-        <p>12321</p>
         <div class="card-actions justify-end">
-          <button class="btn btn-primary">visita</button>
+          <button class="btn btn-primary" @click="this.$router.push(`/associazione/${item._id}`)" > {{item._id}} visita</button>
         </div>
       </div>
     </div>

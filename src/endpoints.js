@@ -19,11 +19,14 @@ export const DeleteAccountEndpoint = domain + subdomainVolontari +"deleteAccount
 export const GetCurrentVolontario = domain + subdomainVolontari +"getCurrentVolontario";
 export const ModifyProfileVolontario = domain + subdomainVolontari +"modifyProfile";
 
+
 export const CambioPasswordAssociazioneEndpoint = domain + subdomainAssociazioni+"changePassword";
 export const getAssociazioniEndpoint = domain + subdomainAssociazioni +"getAssociazioni";
 export const LoginEndpointAssociazione = domain + subdomainAssociazioni +"login";
 export const GetCurrentAssociazione = domain + subdomainAssociazioni +"getCurrentAssociazione";
 export const ModifyProfileAssociazione = domain + subdomainAssociazioni +"modifyProfile";
+export const GetAssociazioneEndpoint = domain + subdomainAssociazioni +"getAssociazione";
+export const SeguiAssociazioneEndpoint = domain + subdomainAssociazioni +"seguiAssociazione";
 
 export const CreateEventEndpoint = domain + subdomainEventi +"creaEvento";
 export const GetEventiEndpoint = domain + subdomainEventi +"getEventi";

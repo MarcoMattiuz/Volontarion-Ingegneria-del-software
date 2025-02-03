@@ -8,6 +8,7 @@ import Profilo from "@/components/account/profilo/Profilo.vue";
 import IMieiEventi from "@/components/eventi/IMieiEventi.vue";
 import ListaEventi from "@/components/eventi/ListaEventi.vue";
 import VisualizzaEvento from "@/components/eventi/VisualizzaEvento.vue";
+import VisualizzaAssociazione from "@/components/account/VisualizzaAssociazione.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -56,6 +57,12 @@ const router = createRouter({
       path: "/evento/:id",
       name: "Evento",
       component: VisualizzaEvento,
+      props: true, // Pass route params as props
+    },
+    {
+      path: "/associazione/:id",
+      name: "associazione",
+      component: VisualizzaAssociazione,
       props: true, // Pass route params as props
     },
     /*{
