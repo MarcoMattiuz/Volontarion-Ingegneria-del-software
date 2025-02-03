@@ -10,6 +10,9 @@ import ListaEventi from "@/components/eventi/ListaEventi.vue";
 import VisualizzaEvento from "@/components/eventi/VisualizzaEvento.vue";
 import VisualizzaAssociazione from "@/components/account/VisualizzaAssociazione.vue";
 import EventiAssociazioniIscritte from "@/components/eventi/EventiAssociazioniIscritte.vue";
+import VisualizzaVolontario from "@/components/account/VisualizzaVolontario.vue";
+import IscrittiEvento from "@/components/account/IscrittiEvento.vue";
+import AssociazioniSeguite from "@/components/account/AssociazioniSeguite.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -70,6 +73,23 @@ const router = createRouter({
       name: "associazione",
       component: VisualizzaAssociazione,
       props: true, // Pass route params as props
+    },
+    {
+      path: "/volontario/:id",
+      name: "volontario",
+      component: VisualizzaVolontario,
+      props: true, // Pass route params as props
+    },
+    {
+      path: "/iscrittiEvento/:id",
+      name: "volontari iscritti a evento",
+      component: IscrittiEvento,
+      props: true, // Pass route params as props
+    },
+    {
+      path: "/associazioni_seguite",
+      name: "associazioni_seguite",
+      component: AssociazioniSeguite,
     },
     /*{
       path: '/about',

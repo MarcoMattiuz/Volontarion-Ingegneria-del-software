@@ -30,28 +30,6 @@ export default {
                     console.error("Error fetching events:", error.message);
                 });
         },
-        async getEvent(eventId) {
-            fetch(DeleteEventEndpoint, {
-                method: 'GET',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ "eventId": eventId }),
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data.response == "ok") {
-                        alert("getEvent ok");
-                    }
-
-                    if (data.error) {
-                        alert("getEvent error");
-                    }
-                })
-                .catch((error) => {
-                    console.error("Error fetching event:", error.message);
-                });
-        },
         
     }
 }
@@ -71,8 +49,7 @@ export default {
                     <p class="text-gray-500"><strong>endDateTime:</strong> {{ event.endDateTime }}</p>
                     <p class="text-gray-500"><strong>Location:</strong> {{ event.place }}</p>
                     <p class="text-gray-500"><strong>Associazione:</strong> {{ event.hostAssociationName }}</p>
-                    <button class="btn btn-danger mt-4" @click="this.$router.push(`/evento/${event._id}`);
-">
+                    <button class="btn btn-danger mt-4" @click="this.$router.push(`/evento/${event._id}`);">
                         ➡️ Visualizza
                     </button>
                 </div>

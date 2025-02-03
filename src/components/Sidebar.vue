@@ -45,6 +45,12 @@
                 <span>I miei eventi</span>
               </a>
             </li>
+            <li v-if="tipo === 'volontario'">
+              <a @click="redirectTo('/associazioni_seguite')">
+                <font-awesome-icon icon="user" />
+                <span>associazioni_seguite</span>
+              </a>
+            </li>
           </div>
         </ul>
       </li>

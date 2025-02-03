@@ -2,10 +2,10 @@
 import CreaEvento from './CreaEvento.vue';
 import { GetMyEventiAssociazioneEndpoint, DeleteEventEndpoint } from '@/endpoints';
 import ModificaEvento from './ModificaEvento.vue';
-import { toRaw } from 'vue';
+import IscrittiEvento from '../account/IscrittiEvento.vue';
 export default {
     components: {
-        CreaEvento, ModificaEvento
+        CreaEvento, ModificaEvento,IscrittiEvento
     },
     data() {
         return {
@@ -100,6 +100,12 @@ export default {
                     </button>
                     <button class="btn btn-danger mt-4" @click="handle(event._id,event)">
                         ✏️ Modifica evento
+                    </button>
+                    <button class="btn btn-danger mt-4" @click="this.$router.push(`/evento/${event._id}`);">
+                        ➡️ Visualizza
+                    </button>
+                    <button class="btn btn-danger mt-4" @click="this.$router.push(`/iscrittiEvento/${event._id}`);">
+                        ➡️ Visualizza Iscritti
                     </button>
                 </div>
 

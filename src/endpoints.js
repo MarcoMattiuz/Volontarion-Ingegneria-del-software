@@ -13,11 +13,14 @@ export const ListaAssociazioniEndpoint = domain + "/api/lista_associazioni";
 export const CambioPasswordVolontarioEndpoint = domain + subdomainVolontari+"changePassword";
 export const LoginEndpointVolontario = domain + subdomainVolontari +"login";
 export const RegistrazioneVolontarioEndpoint =domain + subdomainVolontari +"registrazioneVolontario";
-export const RegistrazioneAssociazioneEndpoint =domain + subdomainAssociazioni +"registrazioneAssociazione";
 export const GetProfilePictureEndpoint = domain + subdomainVolontari +"getProfilePicture";
 export const DeleteAccountEndpoint = domain + subdomainVolontari +"deleteAccount";
 export const GetCurrentVolontario = domain + subdomainVolontari +"getCurrentVolontario";
 export const ModifyProfileVolontario = domain + subdomainVolontari +"modifyProfile";
+export const GetVolontarioEndpoint = domain + subdomainVolontari +"getVolontario";
+export const GetAssociazioniIscritteEndpoint = domain + subdomainVolontari +"getAssociazioniIscritte";
+export const unsubscribeAssociazioneEndpoint = domain + subdomainVolontari +"unsubscribeAssociazione";
+export const SeguiAssociazioneEndpoint = domain + subdomainVolontari +"seguiAssociazione";
 
 
 export const CambioPasswordAssociazioneEndpoint = domain + subdomainAssociazioni+"changePassword";
@@ -26,7 +29,10 @@ export const LoginEndpointAssociazione = domain + subdomainAssociazioni +"login"
 export const GetCurrentAssociazione = domain + subdomainAssociazioni +"getCurrentAssociazione";
 export const ModifyProfileAssociazione = domain + subdomainAssociazioni +"modifyProfile";
 export const GetAssociazioneEndpoint = domain + subdomainAssociazioni +"getAssociazione";
-export const SeguiAssociazioneEndpoint = domain + subdomainAssociazioni +"seguiAssociazione";
+
+export const GetVolontariIscrittiEventoEndpoint = domain + subdomainAssociazioni +"getVolontariIscrittiEvento";
+export const RegistrazioneAssociazioneEndpoint =domain + subdomainAssociazioni +"registrazioneAssociazione";
+
 
 export const CreateEventEndpoint = domain + subdomainEventi +"creaEvento";
 export const GetEventiEndpoint = domain + subdomainEventi +"getEventi";

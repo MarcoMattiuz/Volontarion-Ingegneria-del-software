@@ -68,6 +68,9 @@ export default {
                     <button class="btn btn-danger mt-4" @click="unsubscribeEvent(event._id)">
                         ❌ Disiscriviti
                     </button>
+                    <button class="btn btn-danger mt-4" @click="this.$router.push(`/evento/${event._id}`);">
+                        ➡️ Visualizza
+                    </button>
                 </div>
 
                
