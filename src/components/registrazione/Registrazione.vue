@@ -1,38 +1,46 @@
 <template>
   <div class="registration-container">
     <div class="toggle-buttons">
-      <button @click="currentForm = 'volontari'; toggleoff_email_alreadyregistered()"
-        :class="{ active: currentForm === 'volontari' }">
+      <button
+        @click="
+          currentForm = 'volontari';
+          toggleoff_email_alreadyregistered();
+        "
+        :class="{ active: currentForm === 'volontari' }"
+      >
         Registrazione Volontari
       </button>
-      <button @click="currentForm = 'associazioni'; toggleoff_email_alreadyregistered()"
-        :class="{ active: currentForm === 'associazioni' }">
+      <button
+        @click="
+          currentForm = 'associazioni';
+          toggleoff_email_alreadyregistered();
+        "
+        :class="{ active: currentForm === 'associazioni' }"
+      >
         Registrazione Associazioni
       </button>
     </div>
-    <RegistrazioneAssociazione v-if="currentForm === 'associazioni'"></RegistrazioneAssociazione>
+    <RegistrazioneAssociazione
+      v-if="currentForm === 'associazioni'"
+    ></RegistrazioneAssociazione>
     <RegistrazioneVolontario v-else></RegistrazioneVolontario>
-
   </div>
-  
 </template>
 
 <script>
-
-import RegistrazioneVolontario from './RegistrazioneVolontario.vue';
-import RegistrazioneAssociazione from './RegistrazioneAssociazione.vue';
+import RegistrazioneVolontario from "./RegistrazioneVolontario.vue";
+import RegistrazioneAssociazione from "./RegistrazioneAssociazione.vue";
 
 export default {
   components: {
-      RegistrazioneVolontario,
-      RegistrazioneAssociazione
+    RegistrazioneVolontario,
+    RegistrazioneAssociazione,
   },
   data() {
     return {
-      currentForm: 'volontari',
+      currentForm: "volontari",
     };
   },
-
 };
 </script>
 <style scoped>
@@ -48,9 +56,10 @@ export default {
 }
 
 .toggle-buttons button {
+  color: black;
   margin: 0 10px;
   padding: 10px 15px;
-  background-color: #f0f0f0;
+  background-color: rgba(240, 240, 240, 0.5);
   border: none;
   cursor: pointer;
 }
@@ -59,5 +68,4 @@ export default {
   background-color: #007bff;
   color: white;
 }
-
 </style>

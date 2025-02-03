@@ -8,9 +8,21 @@
         </button>
       </li>
       <li class="active">
-        <a @click="redirectTo('/eventi')">
+        <a @click="redirectTo('/')">
           <font-awesome-icon icon="home" />
-          <span>Eventi</span>
+          <span>Home</span>
+        </a>
+      </li>
+      <li class="active">
+        <a @click="redirectTo('/eventi')">
+          <font-awesome-icon icon="bolt" />
+          <span>Lista eventi</span>
+        </a>
+      </li>
+      <li class="active">
+        <a @click="redirectTo('/listaAssociazioni')">
+          <font-awesome-icon icon="hands-helping" />
+          <span>Lista associazioni</span>
         </a>
       </li>
       <li class="active">
@@ -19,12 +31,7 @@
           <span>Eventi associazioni iscritte</span>
         </a>
       </li>
-      <li class="active">
-        <a @click="redirectTo('/')">
-          <font-awesome-icon icon="home" />
-          <span>Home</span>
-        </a>
-      </li>
+
       <li>
         <button @click="toggleSubMenu($event)" class="dropdown-btn">
           <font-awesome-icon icon="user" />
@@ -61,18 +68,6 @@
         </a>
       </li>
       <li class="active"></li>
-      <li class="active">
-        <a @click="redirectTo('/listaAssociazioni')">
-          <font-awesome-icon icon="spinner" />
-          <span>Lista associazioni</span>
-        </a>
-      </li>
-      <li class="active">
-        <a @click="redirectTo('/registrazioneAssociazione')">
-          <font-awesome-icon icon="spinner" />
-          <span>registrazioneAssociazione</span>
-        </a>
-      </li>
     </ul>
   </aside>
 
