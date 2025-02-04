@@ -11,3 +11,8 @@ const app = createApp(App);
 app.component("font-awesome-icon", FontAwesomeIcon);
 app.use(router);
 app.mount("#app");
+export default defineConfig({
+  build: {
+    chunkSizeWarningLimit: 1000, // Imposta il limite a 1MB (o più se necessario)
+  },
+});
