@@ -1,4 +1,4 @@
-const domain = "https://volontarion-ingegneria-del-software.onrender.com:10000";
+const domain = import.meta.env.VITE_API_URL;
 const subdomainVolontari = "/users/";
 const subdomainAssociazioni = "/associazioni/";
 const subdomainEventi = "/events/";
