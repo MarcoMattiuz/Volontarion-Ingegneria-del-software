@@ -3,6 +3,8 @@ const subdomainVolontari = "/users/";
 const subdomainAssociazioni = "/associazioni/";
 const subdomainEventi = "/events/";
 
+export const LogOutEndpoint = domain + "/logout";
+
 export const CheckLoggedinEndpoint =
   domain + subdomainVolontari + "checkLoggedIn";
 export const ChangeImageVolontarioEndpoint =

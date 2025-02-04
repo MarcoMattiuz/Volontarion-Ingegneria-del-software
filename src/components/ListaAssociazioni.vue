@@ -5,10 +5,20 @@ export default {
   data() {
     return {
       Associazioni: [],
+      searchQuery: "",
     };
   },
   mounted() {
     this.getAssociazioni();
+  },
+  computed: {
+    filteredAssociations() {
+      return this.Associazioni.filter(as => {
+        // Filter by search query
+        const matchesSearch = as.name.toLowerCase().includes(this.searchQuery.toLowerCase());
+        return matchesSearch ;
+      });
+    }
   },
   methods: {
     getAssociazioni() {
@@ -35,9 +45,18 @@ export default {
 </script>
 <template>
   <h2 class="text-2xl font-bold text-center">Associations</h2>
+  
+  <div class="mb-4">
+      <input
+        v-model="searchQuery"
+        type="text"
+        placeholder="Search by associazione name..."
+        class="input input-bordered w-full mb-2"
+      />
+    </div>
   <div class="max-w-4xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
     <div
-      v-for="(item, index) in this.Associazioni"
+      v-for="(item, index) in filteredAssociations"
       :key="index"
       class="card w-96 bg-base-100 shadow-xl"
     >

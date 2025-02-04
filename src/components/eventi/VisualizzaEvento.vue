@@ -103,7 +103,7 @@ export default {
                     </p>
 
                     <!-- Action Buttons -->
-                    <div v-if="tipo === 'volontario'" class="flex justify-center space-x-4 mt-6">
+                    <div v-if="tipo === 'volontario' && new Date(event.endDateTime) > new Date()" class="flex justify-center space-x-4 mt-6">
                         
                         <button class="btn btn-outline" @click="subscribeEvent">Iscriviti</button>
                     </div>

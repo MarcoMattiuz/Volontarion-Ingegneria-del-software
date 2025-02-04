@@ -6,9 +6,19 @@ export default {
     },
     data() {
         return {
-            associazioni: {},
+            associazioni: [],
+            searchQuery: "",
         };
     },
+    computed: {
+    filteredAssociations() {
+      return this.associazioni.filter(as => {
+        // Filter by search query
+        const matchesSearch = as.name.toLowerCase().includes(this.searchQuery.toLowerCase());
+        return matchesSearch ;
+      });
+    }
+  },
     mounted() {
         this.getData();
     },
@@ -55,10 +65,18 @@ export default {
 <template>
     <div class="max-w-4xl mx-auto p-6">
         <h2 class="text-2xl font-bold text-center mb-6">Associazioni iscritte</h2>
+        <div class="mb-4">
+      <input
+        v-model="searchQuery"
+        type="text"
+        placeholder="Search by associazione name..."
+        class="input input-bordered w-full mb-2"
+      />
+    </div>
 
         <!-- Event list -->
-        <div v-if="associazioni.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div v-for="(item, index) in this.associazioni" :key="index" class="card w-96 bg-base-100 shadow-xl">
+        <div v-if="filteredAssociations.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div v-for="(item, index) in filteredAssociations" :key="index" class="card w-96 bg-base-100 shadow-xl">
                     <figure><img :src="item.profilePicture" alt="placeholder" /></figure>
                     <div class="card-body">
                         <h2 class="card-title">{{ item.name }}</h2>
