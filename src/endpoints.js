@@ -1,4 +1,4 @@
-const domain = "http://localhost:8080";
+const domain = "https://volontarion-ingegneria-del-software.onrender.com:10000";
 const subdomainVolontari = "/users/";
 const subdomainAssociazioni = "/associazioni/";
 const subdomainEventi = "/events/";
