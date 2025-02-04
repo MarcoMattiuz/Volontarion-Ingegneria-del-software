@@ -1,15 +1,15 @@
 <template>
   <div class="info-container">
-      <h2>Lista Associazioni</h2>
-      
-      <!-- Loading State -->
-      <p v-if="loading">Loading...</p>
-      
-      <!-- Error State -->
-      <p v-if="error" class="error">{{ error }}</p>
-      
-      <!-- Data Display -->
-        
+    <h2>Lista Associazioni</h2>
+
+    <!-- Loading State -->
+    <p v-if="loading">Loading...</p>
+
+    <!-- Error State -->
+    <p v-if="error" class="error">{{ error }}</p>
+
+    <!-- Data Display -->
+
     <div v-if="!loading && !error" class="info-list">
       <div v-for="item in Info_associazioni" :key="item._id" class="info-card">
         <h3>{{ item.name }}</h3>
@@ -18,51 +18,51 @@
       </div>
     </div>
   </div>
-  </template>
-  
-  <script>
-  import {ListaAssociazioniEndpoint} from '@/endpoints';
-  import axios from 'axios';
-  
-  export default {
-    name: 'Info_associazioni',
-    data() {
-      return {
-        Info_associazioni: [],
-        loading: true,
-        error: null,
-        newInfo: {
-          name: '',
-          email: '',
-          phone: '',
-          password: '',
-        }
+</template>
+
+<script>
+import { ListaAssociazioniEndpoint } from "@/endpoints";
+import axios from "axios";
+
+export default {
+  name: "Info_associazioni",
+  data() {
+    return {
+      Info_associazioni: [],
+      loading: true,
+      error: null,
+      newInfo: {
+        name: "",
+        email: "",
+        phone: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    async fetchInfo() {
+      try {
+        this.loading = true;
+        console.log("Starting fetch request...");
+        const response = await axios.get(ListaAssociazioniEndpoint);
+        console.log("Response received:", response.data);
+        this.Info_associazioni = response.data;
+        this.error = null;
+      } catch (err) {
+        console.error("Detailed fetch error:", err);
+        // More detailed error message
+        this.error = `Failed to fetch information: ${err.message}`;
+      } finally {
+        this.loading = false;
       }
     },
-    methods: {
-      async fetchInfo() {
-          try {
-              this.loading = true;
-              console.log('Starting fetch request...');
-              const response = await axios.get(ListaAssociazioniEndpoint);
-              console.log('Response received:', response.data);
-              this.Info_associazioni = response.data;
-              this.error = null;
-          } catch (err) {
-              console.error('Detailed fetch error:', err);
-              // More detailed error message
-              this.error = `Failed to fetch information: ${err.message}`;
-          } finally {
-              this.loading = false;
-          }
-      }
-    },
-    mounted() {
-    console.log('Component mounted'); // Add this
+  },
+  mounted() {
+    console.log("Component mounted"); // Add this
     this.fetchInfo();
-    }
-  }
-  </script>
+  },
+};
+</script>
 <style>
 .info-container {
   margin: 2rem;
@@ -98,7 +98,7 @@ h3 {
 }
 
 h3:first-of-type {
-  color: #007BFF; /* Colore blu per il nome */
+  color: #007bff; /* Colore blu per il nome */
 }
 
 h3:nth-of-type(2) {
@@ -109,7 +109,6 @@ h3:nth-of-type(3) {
   color: #28a745; /* Colore verde per il telefono */
 }
 
-/* Aggiungi uno stile per il caso di errori */
 .error {
   color: red;
   font-weight: bold;
