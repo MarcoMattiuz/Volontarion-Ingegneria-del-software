@@ -1,4 +1,5 @@
 <script>
+import { LogOutEndpoint } from '@/endpoints';
 export default {
   data() {
     return {
@@ -14,6 +15,27 @@ export default {
     });
   },
   methods: {
+    async logout() {
+      await fetch(LogOutEndpoint, {
+                method: 'Post',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if(data.response){
+                      alert("log out");
+                      this.tipo = undefined;
+                      this.$router.push("/");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error loggint out:", error.message);
+                });
+    },
+
     onStorageChange(event) {
       if (event.key === "userType") {
         this.tipo = event.newValue;
@@ -160,7 +182,12 @@ export default {
           <span>Login</span>
         </a>
       </li>
-      <li class="active"></li>
+      <li v-if="tipo" class="active">
+        <a @click="logout">
+          <font-awesome-icon icon="fa-right-to-bracket" />
+          <span>Logout</span>
+        </a>
+      </li>
     </ul>
   </aside>
 
