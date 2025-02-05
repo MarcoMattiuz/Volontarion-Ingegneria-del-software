@@ -67,16 +67,10 @@ export default {
                 {{ this.profileData.description }}
             </div>
         </div>
-        <div class="card card-side bg-base-100">
+        <div class="col-span-3 card card-side bg-base-100">
             <div class="card-body">
                 <h2 class="card-title">Obiettivi</h2>
                 {{this.profileData.objectives}}
-            </div>
-        </div>
-        <div class="col-span-2 card card-side bg-base-100">
-            <div class="card-body">
-                <h2 class="card-title">subscriptionIter</h2>
-                {{ this.profileData.subscriptionIter }}
             </div>
         </div>
         

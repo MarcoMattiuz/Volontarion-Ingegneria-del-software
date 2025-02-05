@@ -1,4 +1,5 @@
-const domain = import.meta.env.VITE_API_URL;
+//const domain = import.meta.env.VITE_API_URL;
+const domain = "http://localhost:8080"
 const subdomainVolontari = "/users/";
 const subdomainAssociazioni = "/associazioni/";
 const subdomainEventi = "/events/";
@@ -46,6 +47,8 @@ export const ModifyProfileAssociazione =
   domain + subdomainAssociazioni + "modifyProfile";
 export const GetAssociazioneEndpoint =
   domain + subdomainAssociazioni + "getAssociazione";
+  export const GetEventiAssociazioneEndpoint =
+  domain + subdomainAssociazioni + "getEventiAssociazione";
 
 export const GetVolontariIscrittiEventoEndpoint =
   domain + subdomainAssociazioni + "getVolontariIscrittiEvento";

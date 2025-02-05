@@ -129,12 +129,6 @@ export default {
         </a>
       </li>
       <li class="active">
-        <a @click="redirectTo('/eventi')">
-          <font-awesome-icon icon="bolt" />
-          <span>Lista eventi</span>
-        </a>
-      </li>
-      <li class="active">
         <a @click="redirectTo('/listaAssociazioni')">
           <font-awesome-icon icon="hands-helping" />
           <span>Lista associazioni</span>

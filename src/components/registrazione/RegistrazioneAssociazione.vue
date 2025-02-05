@@ -23,8 +23,6 @@
       <label for="objectives">Obiettivi</label>
       <textarea v-model="associazioniFormData.objectives"></textarea>
 
-      <label for="subscriptionIter">SubscriptionIter</label>
-      <textarea v-model="associazioniFormData.subscriptionIter"></textarea>
 
       <button class="btn btn-primary" type="submit">Registrati</button>
     </form>
@@ -46,7 +44,6 @@ export default {
         password: "",
         description: "",
         objectives: "",
-        subscriptionIter: "",
       },
     };
   },
@@ -125,7 +122,6 @@ export default {
           description: "",
           objectives: "",
           profilePicture: "",
-          subscriptionIter: "",
         };
       } catch (error) {
         console.error("Error submitting associazioni form:", error);

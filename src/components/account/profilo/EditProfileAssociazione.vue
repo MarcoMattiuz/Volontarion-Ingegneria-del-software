@@ -162,14 +162,6 @@ export default {
             ></textarea>
           </div>
   
-          <!-- Subscription Iter -->
-          <div class="w-full sm:w-3/4 md:w-1/2">
-            <label for="subscriptionIter" class="text-white">SubscriptionIter</label>
-            <textarea
-              v-model="newData.subscriptionIter"
-              class="w-full p-2 mt-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500"
-            ></textarea>
-          </div>
   
           <!-- Action Buttons -->
           <div class="flex justify-end space-x-2 mt-4">

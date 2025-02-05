@@ -13,6 +13,7 @@ import EventiAssociazioniIscritte from "@/components/eventi/EventiAssociazioniIs
 import VisualizzaVolontario from "@/components/account/VisualizzaVolontario.vue";
 import IscrittiEvento from "@/components/account/IscrittiEvento.vue";
 import AssociazioniSeguite from "@/components/account/AssociazioniSeguite.vue";
+import EventiAssociazione from "@/components/eventi/EventiAssociazione.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,7 +21,7 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: HomeView,
+      component: ListaEventi,
     },
     {
       path: "/login",
@@ -53,11 +54,6 @@ const router = createRouter({
       component: IMieiEventi,
     },
     {
-      path: '/eventi',
-      name: "eventi",
-      component: ListaEventi,
-    },
-    {
       path: "/eventiAssociazioniIscritte",
       name: "eventiAssociazioniIscritte",
       component: EventiAssociazioniIscritte,
@@ -78,18 +74,25 @@ const router = createRouter({
       path: "/volontario/:id",
       name: "volontario",
       component: VisualizzaVolontario,
-      props: true, // Pass route params as props
+      props: true,
     },
     {
       path: "/iscrittiEvento/:id",
       name: "volontari iscritti a evento",
       component: IscrittiEvento,
-      props: true, // Pass route params as props
+      props: true,
     },
     {
       path: "/associazioni_seguite",
       name: "associazioni_seguite",
       component: AssociazioniSeguite,
+    },
+    {
+      path: "/EventiAssociazione/:id",
+      name: "EventiAssociazione",
+      component: EventiAssociazione,
+      props: true, 
+
     },
     /*{
       path: '/about',

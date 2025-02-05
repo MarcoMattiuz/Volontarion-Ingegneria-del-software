@@ -42,9 +42,12 @@ export default {
                 credentials : "include",
                 body : JSON.stringify({idAssociazione : this.profileData._id})
             })
-                .then((response) => response.json())
-                .then((data) => {
-                    alert("seguito");
+                .then((response) => {
+                    if(response.status === 201){
+                        alert("seguito");
+                    }else if (response.status === 202){
+                        alert("stai gia seguendo");
+                    }
                 })
                 .catch((error) => {
                     console.error("Error:", error.message);
@@ -70,6 +73,9 @@ export default {
                     <div v-if="tipo === 'volontario'" class ="card-actions justify-end">
                         <button class="btn btn-primary" @click=segui>Segui</button>
                     </div>
+                    <div  class ="card-actions justify-end">
+                        <button class="btn btn-primary" @click="this.$router.push(`/EventiAssociazione/${this.profileData._id }`)">Eventi</button>
+                    </div>
 
                 </div>
 
@@ -81,19 +87,12 @@ export default {
                 {{ this.profileData.description }}
             </div>
         </div>
-        <div class="card card-side bg-base-100">
+        <div class="col-span-3 card card-side bg-base-100">
             <div class="card-body">
                 <h2 class="card-title">Obiettivi</h2>
                 {{this.profileData.objectives}}
             </div>
         </div>
-        <div class="col-span-2 card card-side bg-base-100">
-            <div class="card-body">
-                <h2 class="card-title">subscriptionIter</h2>
-                {{ this.profileData.subscriptionIter }}
-            </div>
-        </div>
-        
     </div>
 
 </template>

@@ -84,6 +84,7 @@ export default {
                     <!-- Host (If Available) -->
                     <p class=" text-lg">
                         <strong>Hosted by:</strong> {{ event.hostAssociationName }}
+                        <a @click="this.$router.push(`/associazione/${event.hostAssociation}`)"><strong>Go to </strong> {{ event.hostAssociationName }}</a>
                     </p>
 
                     <!-- Event Date & Time -->
