@@ -124,7 +124,7 @@ export default {
       </div>
       <li class="active">
         <a @click="redirectTo('/')">
-          <font-awesome-icon icon="home" />
+          <font-awesome-icon icon="bolt" />
           <span>Events</span>
         </a>
       </li>
@@ -145,20 +145,20 @@ export default {
           <div>
             <li v-if="tipo">
               <a @click="redirectTo('/profilo')">
-                <font-awesome-icon icon="user" />
+                <font-awesome-icon icon="id-badge" />
                 <span>Profilo</span>
               </a>
             </li>
             <li v-if="tipo">
               <a @click="redirectTo('/i_miei_eventi')">
-                <font-awesome-icon icon="user" />
+                <font-awesome-icon icon="bolt" />
                 <span>I miei eventi</span>
               </a>
             </li>
             <li v-if="tipo === 'volontario'">
               <a @click="redirectTo('/associazioni_seguite')">
-                <font-awesome-icon icon="user" />
-                <span>associazioni_seguite</span>
+                <font-awesome-icon icon="hands-helping" />
+                <span>Associazioni seguite</span>
               </a>
             </li>
           </div>
@@ -167,12 +167,13 @@ export default {
       <li class="active">
         <a @click="redirectTo('/login')">
           <font-awesome-icon icon="fa-right-to-bracket" />
-          <span>Login</span>
+          <span>Login / Registrazione </span>
         </a>
       </li>
       <li v-if="tipo" class="active">
         <a @click="logout">
-          <font-awesome-icon icon="fa-right-to-bracket" />
+          <font-awesome-icon icon="fa-right-from-bracket" />
+
           <span>Logout</span>
         </a>
       </li>
