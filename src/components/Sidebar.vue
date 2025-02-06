@@ -1,5 +1,5 @@
 <script>
-import { LogOutEndpoint } from '@/endpoints';
+import { LogOutEndpoint } from "@/endpoints";
 export default {
   data() {
     return {
@@ -17,23 +17,23 @@ export default {
   methods: {
     async logout() {
       await fetch(LogOutEndpoint, {
-                method: 'Post',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include",
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    if(data.response){
-                      alert("log out");
-                      this.tipo = undefined;
-                      this.$router.push("/");
-                    }
-                })
-                .catch((error) => {
-                    console.error("Error loggint out:", error.message);
-                });
+        method: "Post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.response) {
+            alert("log out");
+            this.tipo = undefined;
+            this.$router.push("/");
+          }
+        })
+        .catch((error) => {
+          console.error("Error loggint out:", error.message);
+        });
     },
 
     onStorageChange(event) {
@@ -125,7 +125,7 @@ export default {
       <li class="active">
         <a @click="redirectTo('/')">
           <font-awesome-icon icon="home" />
-          <span>Home</span>
+          <span>Events</span>
         </a>
       </li>
       <li class="active">
