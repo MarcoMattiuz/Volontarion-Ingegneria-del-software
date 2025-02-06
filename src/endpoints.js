@@ -23,7 +23,7 @@ export const GetProfilePictureEndpoint =
 export const DeleteAccountEndpoint =
   domain + subdomainVolontari + "deleteAccount";
 export const GetCurrentVolontario =
-  domain + subdomainVolontari + "getCurrentVolontario";
+  domain + subdomainVolontari + "getcurrentvolontario";
 export const ModifyProfileVolontario =
   domain + subdomainVolontari + "modifyProfile";
 export const GetVolontarioEndpoint =

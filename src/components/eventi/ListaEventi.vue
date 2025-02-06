@@ -8,8 +8,8 @@ export default {
   data() {
     return {
       eventi: [],
-      searchQuery: "",  // For searching by event name
-      filterOption: "all",  // For filtering by Expired, Upcoming, or All events
+      searchQuery: "", // For searching by event name
+      filterOption: "all", // For filtering by Expired, Upcoming, or All events
     };
   },
   mounted() {
@@ -17,17 +17,22 @@ export default {
   },
   computed: {
     filteredEvents() {
-      return this.eventi.filter(event => {
+      return this.eventi.filter((event) => {
         // Filter by search query
-        const matchesSearch = event.name.toLowerCase().includes(this.searchQuery.toLowerCase());
-        
+        const matchesSearch = event.name
+          .toLowerCase()
+          .includes(this.searchQuery.toLowerCase());
+
         // Filter by event status (expired or upcoming)
-        const matchesStatus = this.filterOption === "all" ||
-                              (this.filterOption === "expired" && (new Date(event.endDateTime) < new Date())) ||
-                              (this.filterOption === "upcoming" && (new Date(event.startDateTime) >= new Date(event)));
+        const matchesStatus =
+          this.filterOption === "all" ||
+          (this.filterOption === "expired" &&
+            new Date(event.endDateTime) < new Date()) ||
+          (this.filterOption === "upcoming" &&
+            new Date(event.startDateTime) >= new Date(event));
         return matchesSearch && matchesStatus;
       });
-    }
+    },
   },
   methods: {
     async getEventi() {
@@ -46,7 +51,6 @@ export default {
           console.error("Error fetching events:", error.message);
         });
     },
-
   },
 };
 </script>
@@ -74,13 +78,25 @@ export default {
     </div>
 
     <!-- Event list -->
-    <div v-if="filteredEvents.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div
+      v-if="filteredEvents.length > 0"
+      class="grid grid-cols-1 md:grid-cols-2 gap-4"
+    >
       <div
         v-for="event in filteredEvents"
         :key="event.id"
         class="card bg-base-100 shadow-md p-4 border rounded-lg"
       >
-        <figure><img :src="event.picture" alt="placeholder" /></figure>
+        <figure>
+          <img
+            :src="
+              event.picture && event.picture !== ''
+                ? event.picture
+                : '/placeholder.png'
+            "
+            alt="placeholder"
+          />
+        </figure>
         <div class="card-body">
           <h3 class="card-title text-lg font-semibold">{{ event.name }}</h3>
           <p class="text-gray-500">
@@ -95,12 +111,15 @@ export default {
           <p class="text-gray-500">
             <strong>Associazione:</strong> {{ event.hostAssociationName }}
           </p>
-          
+
           <!-- Expired Event Tag -->
-          <p v-if="new Date(event.endDateTime) < new Date()" class="text-red-500 text-sm">
+          <p
+            v-if="new Date(event.endDateTime) < new Date()"
+            class="text-red-500 text-sm"
+          >
             <strong>Expired</strong>
           </p>
-          
+
           <button
             class="btn btn-danger mt-4"
             @click="this.$router.push(`/evento/${event._id}`)"
@@ -113,4 +132,3 @@ export default {
     <p v-else class="text-gray-500 text-center mt-4">No events found.</p>
   </div>
 </template>
-

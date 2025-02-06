@@ -134,12 +134,6 @@ export default {
           <span>Lista associazioni</span>
         </a>
       </li>
-      <li class="active">
-        <a @click="redirectTo('/eventiAssociazioniIscritte')">
-          <font-awesome-icon icon="home" />
-          <span>Eventi associazioni iscritte</span>
-        </a>
-      </li>
 
       <li>
         <button @click="toggleSubMenu($event)" class="dropdown-btn">
