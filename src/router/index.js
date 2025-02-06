@@ -6,6 +6,7 @@ import Lista_Associazioni from '@/components/ListaAssociazioni.vue'
 import RegistrazioneAssociazione from '@/components/login_signup/RegistrazioneAssociazione.vue'
 import Registrazione from '@/components/Registrazione.vue'
 import Profilo from '@/components/account/Profilo.vue'
+import Home from '@/components/Home.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
