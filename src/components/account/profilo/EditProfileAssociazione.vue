@@ -54,9 +54,10 @@ export default {
             fetch(ModifyProfileAssociazione, {
                 method: 'POST',
                 headers: {
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`,
                     "Content-Type": "application/json",
                 },
-                credentials: "include",
+                
                 body: JSON.stringify({ "data": data })
             })
                 .then(response => response.json())

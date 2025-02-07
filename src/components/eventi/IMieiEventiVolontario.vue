@@ -34,8 +34,9 @@ export default {
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json",
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`,
                 },
-                credentials: "include",
+                
             })
                 .then((response) => response.json())
                 .then((data) => {
@@ -51,8 +52,9 @@ export default {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`,
                 },
-                credentials: "include",
+                
                 body: JSON.stringify({ id: eventId })
             })
                 .then((response) => response.json())

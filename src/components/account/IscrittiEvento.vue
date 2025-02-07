@@ -22,8 +22,8 @@ export default {
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json",
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`,
                 },
-                credentials:"include",
             })
                 .then((response) => response.json())
                 .then((data) => {
