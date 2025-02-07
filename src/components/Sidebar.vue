@@ -31,8 +31,9 @@ export default {
         method: "Post",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem("token")}`,
         },
-        credentials: "include",
+       
       })
         .then((response) => response.json())
         .then((data) => {
@@ -40,6 +41,7 @@ export default {
             alert("log out");
             this.tipo = undefined;
             sessionStorage.removeItem("userType"); // Rimuovi il tipo di utente dalla sessione
+            localStorage.removeItem("token");
             this.isLoggedIn = false; // Imposta lo stato di login su false
             this.$router.push("/");
           }

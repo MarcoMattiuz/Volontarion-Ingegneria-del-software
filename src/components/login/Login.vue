@@ -32,13 +32,14 @@ export default {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        credentials: "include",
         body: postData.toString(),
       })
         .then((response) => response.json())
         .then((data) => {
           //
           sessionStorage.setItem("userType", this.tipo);
+          localStorage.setItem("token", data.token);
+         
           //
           //crea evento che userType è cambiato
           window.dispatchEvent(

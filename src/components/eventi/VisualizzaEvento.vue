@@ -40,8 +40,8 @@ export default {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`,
                 },
-                credentials:'include',
                 body : JSON.stringify({ id: this.event._id }),
             })
                 .then((response) => response.json())

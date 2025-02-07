@@ -26,8 +26,9 @@ export default {
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`,
                 },
-                credentials: "include",
+                
             })
                 .then((response) => response.json())
                 .then((data) => {
