@@ -23,7 +23,6 @@
       <label for="objectives">Obiettivi</label>
       <textarea v-model="associazioniFormData.objectives"></textarea>
 
-
       <button class="btn btn-primary" type="submit">Registrati</button>
     </form>
   </div>

@@ -49,6 +49,12 @@ export default {
           );
           console.log("Response:", data);
           console.log("data", this.postData);
+
+          if (data.response === "OK") {
+            alert("Login successful!");
+          } else {
+            alert("Login failed!");
+          }
         })
         .catch((error) => {
           console.error("Error:", error.message);

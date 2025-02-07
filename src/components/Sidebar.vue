@@ -1,7 +1,6 @@
 <script>
 import { LogOutEndpoint } from "@/endpoints";
-
-
+import { GetCurrentVolontario } from "@/endpoints";
 export default {
   data() {
     return {
@@ -11,18 +10,21 @@ export default {
       theme: "gray-900",
       text: "gray-200",
       isLoggedIn: !!sessionStorage.getItem("userType"),
+      profileData: [],
     };
   },
-  
+
   mounted() {
     //update di tipe se userType è cambiato (da Login)
     window.addEventListener("userTypeChanged", (event) => {
+      this.getDataProfilo();
       this.tipo = event.detail.userType;
       this.isLoggedIn = !!sessionStorage.getItem("userType");
     });
+    console.log(this.getDataProfilo());
     window.addEventListener("resize", this.handleResize);
   },
-  beforeUnmount(){
+  beforeUnmount() {
     window.removeEventListener("resize", this.handleResize);
   },
   methods: {
@@ -119,25 +121,50 @@ export default {
         this.text = text;
       }
     },
+    getDataProfilo() {
+      fetch(GetCurrentVolontario, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        credentials: "include",
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Response:", data);
+          this.profileData = data;
+        })
+        .catch((error) => {
+          console.error("Error:", error.message);
+        });
+    },
   },
 };
 </script>
 <template>
-  <aside id="sidebar" ref="sidebar" :class="[
-        'transition-transform duration-300 fixed left-0 top-0 h-full bg-gray-800 text-white', 
-        isOpen ? 'translate-x-0' : '-translate-x-full', 
-        isMobile ? 'w-16' : 'w-64'
-      ]">
+  <aside
+    id="sidebar"
+    ref="sidebar"
+    :class="[
+      'transition-transform duration-300 fixed left-0 top-0 h-full bg-gray-800 text-white',
+      isOpen ? 'translate-x-0' : '-translate-x-full',
+      isMobile ? 'w-16' : 'w-64',
+    ]"
+  >
     <ul>
       <li>
         <span class="logo">VolontariOn</span>
-        <button  @click="toggleSidebar()" id="toggle-btn" ref="toggle-btn">
+        <button @click="toggleSidebar()" id="toggle-btn" ref="toggle-btn">
           <font-awesome-icon :icon="['fas', 'angles-left']" />
         </button>
       </li>
       <div class="circle-image-container">
         <img
-          src="/accountPlaceholder.jpg"
+          :src="
+            profileData.profilePicture && profileData.profilePicture !== ''
+              ? profileData.profilePicture
+              : '/accountPlaceholder.jpg'
+          "
           alt="Placeholder Image"
           class="circle-image"
         />
@@ -151,7 +178,7 @@ export default {
       <li class="active">
         <a @click="redirectTo('/listaAssociazioni')">
           <font-awesome-icon icon="hands-helping" />
-          <span>Lista associazioni</span>
+          <span>Associations</span>
         </a>
       </li>
 
@@ -199,5 +226,4 @@ export default {
       </li>
     </ul>
   </aside>
-
 </template>
