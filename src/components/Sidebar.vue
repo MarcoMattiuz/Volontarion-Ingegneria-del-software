@@ -127,9 +127,8 @@ export default {
       fetch(GetCurrentVolontario, {
         method: "GET",
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          "Content-Type": "application/json",
         },
-        credentials: "include",
       })
         .then((response) => response.json())
         .then((data) => {
