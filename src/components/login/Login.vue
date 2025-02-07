@@ -10,13 +10,12 @@ export default {
       tipo: "volontario",
       email: "",
       password: "",
-      
     };
   },
   computed: {
     isLoggedIn() {
-      return !!sessionStorage.getItem('userType');
-    }
+      return !!sessionStorage.getItem("userType");
+    },
   },
   components: {},
   methods: {
@@ -49,6 +48,7 @@ export default {
             })
           );
           console.log("Response:", data);
+          console.log("data", this.postData);
         })
         .catch((error) => {
           console.error("Error:", error.message);
