@@ -6,9 +6,11 @@ export default {
   data() {
     return {
       tipo: sessionStorage.getItem("userType"),
+      isMobile: window.innerWidth < 820,
       isOpen: window.innerWidth >= 820,
       theme: "gray-900",
       text: "gray-200",
+      isLoggedIn: !!sessionStorage.getItem("userType"),
     };
   },
   
@@ -16,6 +18,7 @@ export default {
     //update di tipe se userType è cambiato (da Login)
     window.addEventListener("userTypeChanged", (event) => {
       this.tipo = event.detail.userType;
+      this.isLoggedIn = !!sessionStorage.getItem("userType");
     });
     window.addEventListener("resize", this.handleResize);
   },
@@ -36,15 +39,14 @@ export default {
           if (data.response) {
             alert("log out");
             this.tipo = undefined;
+            sessionStorage.removeItem("userType"); // Rimuovi il tipo di utente dalla sessione
+            this.isLoggedIn = false; // Imposta lo stato di login su false
             this.$router.push("/");
           }
         })
         .catch((error) => {
           console.error("Error loggint out:", error.message);
         });
-    },
-    handleResize() {
-      this.isOpen = window.innerWidth >= 820; // Si aggiorna in base alla dimensione
     },
     onStorageChange(event) {
       if (event.key === "userType") {
@@ -53,6 +55,10 @@ export default {
     },
     redirectTo(url) {
       this.$router.push(url);
+    },
+    handleResize() {
+      this.isMobile = window.innerWidth < 820;
+      this.isOpen = window.innerWidth >= 820; // Se è desktop, la sidebar è aperta
     },
     toggleSubMenu(event) {
       const sidebar = document.getElementById("sidebar");
@@ -117,11 +123,15 @@ export default {
 };
 </script>
 <template>
-  <aside id="sidebar" ref="sidebar" :class="isOpen ? 'translate-x-0' : '-translate-x-full'">
+  <aside id="sidebar" ref="sidebar" :class="[
+        'transition-transform duration-300 fixed left-0 top-0 h-full bg-gray-800 text-white', 
+        isOpen ? 'translate-x-0' : '-translate-x-full', 
+        isMobile ? 'w-16' : 'w-64'
+      ]">
     <ul>
       <li>
         <span class="logo">VolontariOn</span>
-        <button @click="toggleSidebar()" id="toggle-btn" ref="toggle-btn">
+        <button  @click="toggleSidebar()" id="toggle-btn" ref="toggle-btn">
           <font-awesome-icon :icon="['fas', 'angles-left']" />
         </button>
       </li>

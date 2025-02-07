@@ -64,8 +64,8 @@ export default {
 
 <template>
     <div class="max-w-4xl mx-auto p-6">
-        <h2 class="text-2xl font-bold text-center mb-6">Associazioni iscritte</h2>
-        <div class="mb-4">
+        <h2 class="text-2xl font-bold text-center mb-6 section-spacing">Associazioni iscritte</h2>
+        <div class="form-layout">
       <input
         v-model="searchQuery"
         type="text"

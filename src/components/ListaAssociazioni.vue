@@ -58,7 +58,7 @@ export default {
     <div
       v-for="(item, index) in filteredAssociations"
       :key="index"
-      class="card w-96 bg-base-100 shadow-xl card-layout element-spacing"
+      class="card w-96 bg-base-100 shadow-xl"
     >
       <figure>
         <img
@@ -70,7 +70,7 @@ export default {
           alt="profile picture"
         />
       </figure>
-      <div class="card-body card-layout">
+      <div class="card-body">
         <h2 class="card-title section-spacing">{{ item.name }}</h2>
         <div class="card-actions justify-end">
           <button

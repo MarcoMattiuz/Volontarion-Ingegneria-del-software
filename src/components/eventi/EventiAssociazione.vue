@@ -51,10 +51,10 @@ export default {
 </script>
 
 <template>
-  <h2 class="text-2xl font-bold text-center">Events</h2>
+  <h2 class="text-2xl font-bold text-center section-spacing">Events</h2>
   <div class="max-w-4xl mx-auto p-6">
     <!-- Search Bar -->
-    <div class="mb-4">
+    <div class="form-layout">
       <input
         v-model="searchQuery"
         type="text"
@@ -64,7 +64,7 @@ export default {
     </div>
 
     <!-- Filter Dropdown for Expired or Upcoming events -->
-    <div class="mb-4">
+    <div class="form-layout">
       <select v-model="filterOption" class="input input-bordered w-full mb-2">
         <option value="all">All Events</option>
         <option value="upcoming">Upcoming Events</option>

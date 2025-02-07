@@ -69,7 +69,7 @@ export default {
     </div>
 
     <!-- Filter Dropdown for Expired or Upcoming events -->
-    <div class="form-layout">
+    <div class="form-layout ">
       <select v-model="filterOption" class="input input-bordered w-full mb-2">
         <option value="all">All Events</option>
         <option value="upcoming">Upcoming Events</option>
@@ -80,12 +80,12 @@ export default {
     <!-- Event list -->
     <div
       v-if="filteredEvents.length > 0"
-      class="grid grid-cols-1 md:grid-cols-2 gap-4"
+      class="grid grid-cols-1 md:grid-cols-2 gap-4 "
     >
       <div
         v-for="event in filteredEvents"
         :key="event.id"
-        class="card bg-base-100 shadow-md p-4 border rounded-lg"
+        class="card bg-base-100 shadow-md p-4 border rounded-lg "
       >
         <figure>
           <img
@@ -97,7 +97,7 @@ export default {
             alt="placeholder"
           />
         </figure>
-        <div class="card-body card-layout">
+        <div class="card-body ">
           <h3 class="card-title text-lg font-semibold">{{ event.name }}</h3>
           <p class="text-gray-500">
             <strong>startDateTime:</strong> {{ event.startDateTime }}
