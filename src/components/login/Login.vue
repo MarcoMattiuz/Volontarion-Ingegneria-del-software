@@ -1,33 +1,34 @@
 <script>
-import { LoginEndpointVolontario } from '@/endpoints';
+import { LoginEndpointVolontario } from "@/endpoints";
+import { LoginEndpointAssociazione } from "@/endpoints";
 
 export default {
   data() {
     return {
+      endpoint: LoginEndpointVolontario,
       message: "sono associazione",
       tipo: "volontario",
       email: "",
       password: "",
-      submitted: false, // Track if the form was submitted
+      
     };
-    
   },
-  components: {
-    
+  computed: {
+    isLoggedIn() {
+      return !!sessionStorage.getItem('userType');
+    }
   },
+  components: {},
   methods: {
     handleSubmit() {
       console.log("Email:", this.email);
       console.log("Password:", this.password);
-      this.submitted = true;
       const postData = new URLSearchParams();
       postData.append("email", this.email);
       postData.append("password", this.password);
 
-
-      //aggiungere endpoint login associazione
-      fetch(LoginEndpointVolontario, {
-        method: 'POST',
+      fetch(this.endpoint, {
+        method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
@@ -37,8 +38,16 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           //
-          localStorage.setItem('userType', this.tipo);
+          sessionStorage.setItem("userType", this.tipo);
           //
+          //crea evento che userType è cambiato
+          window.dispatchEvent(
+            new CustomEvent("userTypeChanged", {
+              detail: {
+                userType: sessionStorage.getItem("userType"),
+              },
+            })
+          );
           console.log("Response:", data);
         })
         .catch((error) => {
@@ -50,48 +59,42 @@ export default {
     redirectTo(url) {
       this.$router.push(url);
     },
-  },
-
     toggle() {
-      console.log(this.tipo+" "+this.message);
+      console.log(this.tipo + " " + this.message);
       if (this.tipo == "volontario") {
         this.tipo = "associazione";
+        this.endpoint = LoginEndpointAssociazione;
         this.message = "sono volontario";
-      }
-      else if (this.tipo == "associazione") {
+      } else if (this.tipo == "associazione") {
         this.tipo = "volontario";
+        this.endpoint = LoginEndpointVolontario;
+
         this.message = "sono associazione";
       }
     },
-  }
-;
+  },
+};
 </script>
 
 <template>
   <div class="login-container">
+    <p class="login-title">login {{ this.tipo }}</p>
     <form class="login-form" @submit.prevent="handleSubmit" method="POST">
       <label for="email">Email</label>
       <input class="containter" type="email" v-model="email" required />
-
       <label for="password">Password</label>
-      <input class="containter" type="password" v-model="password" required>
-      <button class="btn btn-primary" type="submit">Login</button>
+      <input class="containter" type="password" v-model="password" required />
+      <button class="btn btn-primary" type="submit" style="margin-bottom: 10px">
+        Login
+      </button>
+      <button @click="toggle" type="button" class="btn btn-primary">
+        {{ this.message }}
+      </button>
     </form>
-    <a @click="redirectTo('/registrazione')">Non sei registrato?</a>
+    <a @click="redirectTo('/registrazione')" class="link-register"
+      >Non sei registrato?</a
+    >
   </div>
-  
-
-  
-  <p> login {{ tipo }}</p>
-  <form @submit.prevent="handleSubmit" method="POST">
-    <label for="email">Email</label>
-    <input type="email" v-model="email" required />
-
-    <label for="password">Password</label>
-    <input type="password" v-model="password" required>
-    <button @click="toggle" type="button" class="btn btn-primary">{{ message }}</button>
-    <button class="btn btn-primary" type="submit">Login</button>
-  </form>
 </template>
 
 <style scoped></style>

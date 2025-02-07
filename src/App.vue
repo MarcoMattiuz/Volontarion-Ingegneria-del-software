@@ -1,27 +1,15 @@
 <script setup>
-import Login from './components/login_signup/Login.vue';
-import ImageUpload from './components/util/ImageUpload.vue';
-import GetProfilePicture from './components/util/GetProfilePicture.vue';
-import RegistrazioneVolontario from './components/login_signup/RegistrazioneVolontario.vue';
-import DeleteAccount from './components/account/DeleteAccount.vue';
-import Sidebar from './components/Sidebar.vue'
+import Sidebar from "./components/Sidebar.vue";
 </script>
 
 <template>
-  <div class="app">
+  <div class="app" style="height: 100vh; width: 100vw">
     <Sidebar></Sidebar>
-    <main class="routerview">
+    <main class="routerview responsive-container">
       <RouterView></RouterView>
     </main>
-      
-    
-  
   </div>
-  
-  
-  
-  
-  
+
   <!--
   <RegistrazioneVolontario></RegistrazioneVolontario>
   <br>
@@ -33,13 +21,6 @@ import Sidebar from './components/Sidebar.vue'
   <GetProfilePicture></GetProfilePicture>
   <DeleteAccount></DeleteAccount>
   -->
-  
 </template>
 
-
-  
-
-
-<style scoped>
-
-</style>
+<style scoped></style>
