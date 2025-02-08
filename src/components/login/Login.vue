@@ -10,13 +10,12 @@ export default {
       tipo: "volontario",
       email: "",
       password: "",
-      
     };
   },
   computed: {
     isLoggedIn() {
-      return !!sessionStorage.getItem('userType');
-    }
+      return !!sessionStorage.getItem("userType");
+    },
   },
   components: {},
   methods: {
@@ -32,13 +31,14 @@ export default {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        credentials: "include",
         body: postData.toString(),
       })
         .then((response) => response.json())
         .then((data) => {
           //
           sessionStorage.setItem("userType", this.tipo);
+          localStorage.setItem("token", data.token);
+         
           //
           //crea evento che userType è cambiato
           window.dispatchEvent(
@@ -49,6 +49,13 @@ export default {
             })
           );
           console.log("Response:", data);
+          console.log("data", this.postData);
+
+          if (data.response === "OK") {
+            alert("Login successful!");
+          } else {
+            alert("Login failed!");
+          }
         })
         .catch((error) => {
           console.error("Error:", error.message);

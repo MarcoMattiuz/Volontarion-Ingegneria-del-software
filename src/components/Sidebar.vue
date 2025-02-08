@@ -1,7 +1,6 @@
 <script>
 import { LogOutEndpoint } from "@/endpoints";
-
-
+import { GetCurrentVolontario } from "@/endpoints";
 export default {
   data() {
     return {
@@ -11,18 +10,21 @@ export default {
       theme: "gray-900",
       text: "gray-200",
       isLoggedIn: !!sessionStorage.getItem("userType"),
+      profileData: [],
     };
   },
-  
+
   mounted() {
     //update di tipe se userType è cambiato (da Login)
     window.addEventListener("userTypeChanged", (event) => {
+      this.getDataProfilo();
       this.tipo = event.detail.userType;
       this.isLoggedIn = !!sessionStorage.getItem("userType");
     });
+    console.log(this.getDataProfilo());
     window.addEventListener("resize", this.handleResize);
   },
-  beforeUnmount(){
+  beforeUnmount() {
     window.removeEventListener("resize", this.handleResize);
   },
   methods: {
@@ -31,8 +33,9 @@ export default {
         method: "Post",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem("token")}`,
         },
-        credentials: "include",
+       
       })
         .then((response) => response.json())
         .then((data) => {
@@ -40,6 +43,7 @@ export default {
             alert("log out");
             this.tipo = undefined;
             sessionStorage.removeItem("userType"); // Rimuovi il tipo di utente dalla sessione
+            localStorage.removeItem("token");
             this.isLoggedIn = false; // Imposta lo stato di login su false
             this.$router.push("/");
           }
@@ -130,6 +134,22 @@ export default {
         });
       }
     },
+    getDataProfilo() {
+      fetch(GetCurrentVolontario, {
+        method: "GET",
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Response:", data);
+          this.profileData = data;
+        })
+        .catch((error) => {
+          console.error("Error:", error.message);
+        });
+    },
   },
 };
 </script>
@@ -144,7 +164,11 @@ export default {
       </li>
       <div class="circle-image-container">
         <img
-          src="/accountPlaceholder.jpg"
+          :src="
+            profileData.profilePicture && profileData.profilePicture !== ''
+              ? profileData.profilePicture
+              : '/accountPlaceholder.jpg'
+          "
           alt="Placeholder Image"
           class="circle-image"
         />
@@ -158,7 +182,7 @@ export default {
       <li class="active">
         <a @click="redirectTo('/listaAssociazioni')">
           <font-awesome-icon icon="hands-helping" />
-          <span>Lista associazioni</span>
+          <span>Associations</span>
         </a>
       </li>
 
@@ -206,5 +230,4 @@ export default {
       </li>
     </ul>
   </aside>
-
 </template>

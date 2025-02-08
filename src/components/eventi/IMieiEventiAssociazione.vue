@@ -44,8 +44,9 @@ export default {
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`,
                 },
-                credentials: "include",
+                
             })
                 .then((response) => response.json())
                 .then((data) => {
@@ -66,9 +67,10 @@ export default {
                 method: 'DELETE',
                 headers: {
                     "Content-Type": "application/json",
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`,
                 },
                 body: JSON.stringify({ "eventId": eventId }),
-                credentials: "include",
+                
             })
                 .then((response) => response.json())
                 .then((data) => {

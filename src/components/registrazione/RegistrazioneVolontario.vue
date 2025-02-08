@@ -1,69 +1,116 @@
 <template>
   <div class="registration-container">
     <form @submit.prevent="handleVolontariSubmit">
-      <label for="name">Foto Profilo</label>
-      <img :src="this.volontariFormData.profilePicture" />
-      <input type="file" @change="handleFileUpload" accept="image/*" />
+      <div class="form-grid">
+        <!-- Foto Profilo -->
+        <div class="form-group full-width">
+          <label for="name">Foto Profilo</label>
+          <img :src="this.volontariFormData.profilePicture" />
+          <input type="file" @change="handleFileUpload" accept="image/*" />
+        </div>
 
-      <label for="name">Name</label>
-      <input type="text" v-model.trim="volontariFormData.name" required />
+        <div class="form-group">
+          <label for="name">Nome</label>
+          <input type="text" v-model.trim="volontariFormData.name" required />
+        </div>
 
-      <label for="surname">Surname</label>
-      <input type="text" v-model.trim="volontariFormData.surname" required />
+        <div class="form-group">
+          <label for="surname">Cognome</label>
+          <input
+            type="text"
+            v-model.trim="volontariFormData.surname"
+            required
+          />
+        </div>
 
-      <label for="age">Age</label>
-      <input
-        type="number"
-        v-model.number="volontariFormData.age"
-        min="1"
-        max="200"
-        required
-      />
+        <div class="form-group">
+          <label for="age">Età</label>
+          <input
+            type="number"
+            v-model.number="volontariFormData.age"
+            min="1"
+            max="200"
+            required
+          />
+        </div>
 
-      <label for="email">Email</label>
-      <input type="email" v-model.trim="volontariFormData.email" required />
-      <p v-if="email_registered" class="error">Email già registrata</p>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" v-model.trim="volontariFormData.email" required />
+          <p v-if="email_registered" class="error">Email già registrata</p>
+        </div>
 
-      <label for="phone">Phone</label>
-      <input type="tel" v-model.trim="volontariFormData.phone" />
+        <div class="form-group">
+          <label for="phone">Telefono</label>
+          <input type="tel" v-model.trim="volontariFormData.phone" />
+        </div>
 
-      <label for="password">Password</label>
-      <input type="password" v-model="volontariFormData.password" required />
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            v-model="volontariFormData.password"
+            required
+          />
+        </div>
 
-      <label for="description">Descrizione</label>
-      <textarea v-model="volontariFormData.description"></textarea>
+        <div class="form-group full-width">
+          <label for="description">Descrizione</label>
+          <textarea v-model="volontariFormData.description"></textarea>
+        </div>
 
-      <label for="experience">Experience</label>
-      <textarea v-model="volontariFormData.experience"></textarea>
+        <div class="form-group full-width">
+          <label for="experience">Esperienza</label>
+          <textarea v-model="volontariFormData.experience"></textarea>
+        </div>
 
-      <h2>Add Your Skills</h2>
-      <label for="skill">Skill:</label>
-      <input
-        id="skill"
-        v-model="newSkill"
-        type="text"
-        placeholder="Enter a skill"
-        class="input"
-      />
-      <button @click="addSkill" type="button" class="btn btn-primary">
-        Add Skill
-      </button>
+        <!-- Sezione Skills -->
+        <div class="form-group full-width">
+          <h2>Aggiungi le tue competenze</h2>
+          <label for="skill">Skill:</label>
+          <div class="skill-input">
+            <input
+              id="skill"
+              v-model="newSkill"
+              type="text"
+              placeholder="Inserisci una competenza"
+            />
+            <button
+              id="skill-btn"
+              @click="addSkill"
+              type="button"
+              class="btn btn-primary"
+            >
+              Add
+            </button>
+          </div>
+        </div>
 
-      <h3>Your Skills:</h3>
-      <ul>
-        <li v-for="(skill, index) in volontariFormData.skills" :key="index">
-          {{ skill }}
-          <button @click="removeSkill(index)" class="btn btn-danger">
-            Remove
-          </button>
-        </li>
-      </ul>
+        <div class="form-group full-width">
+          <h3>Le tue competenze:</h3>
+          <ul class="skill-list">
+            <li
+              class="skills"
+              v-for="(skill, index) in volontariFormData.skills"
+              :key="index"
+            >
+              {{ skill }}
+              <button
+                id="remove-btn"
+                @click="removeSkill(index)"
+                class="btn btn-danger"
+              >
+                X
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
 
       <button class="btn btn-primary" type="submit">Registrati</button>
     </form>
   </div>
 </template>
-
 <script>
 import { RegistrazioneVolontarioEndpoint } from "@/endpoints";
 
@@ -183,7 +230,7 @@ export default {
 </script>
 <style scoped>
 .registration-container {
-  max-width: 400px;
+  max-width: 600px; /* Più largo per supportare due colonne */
   margin: 10px auto;
   padding: 1rem;
   border: 0.3rem solid black;
@@ -195,16 +242,69 @@ form {
   flex-direction: column;
 }
 
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.full-width {
+  grid-column: span 2; /* I campi più grandi occupano entrambe le colonne */
+}
+
 label {
   margin-top: 10px;
 }
 
-input {
+input,
+textarea {
   margin-bottom: 10px;
   padding: 5px;
+  width: 100%;
 }
 
 button {
   margin-top: 15px;
+  width: 100%;
+}
+
+/* Stile per la gestione delle skill */
+.skill-input {
+  display: flex;
+  gap: 10px;
+}
+
+.skill-input input {
+  flex-grow: 1;
+}
+
+.skill-list {
+  list-style: none;
+  padding: 0;
+}
+
+.skill-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  background-color: black;
+  padding: 5px 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+
+#skill-btn {
+  width: 50px;
+}
+#remove-btn {
+  display: flex;
+  align-items: center;
+  width: 30px;
 }
 </style>

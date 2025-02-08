@@ -31,8 +31,9 @@ export default {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`,
                 },
-                credentials: "include",
+                
                 body: JSON.stringify({ password: this.password, newPassword: this.newPassword }),
             })
                 .then(response => response.json())

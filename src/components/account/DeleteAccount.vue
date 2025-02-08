@@ -1,5 +1,5 @@
 <script>
-import { DeleteAccountEndpoint, GetProfilePictureEndpoint } from '@/endpoints';
+import { DeleteAccountEndpoint } from '@/endpoints';
 
 
 export default {
@@ -8,8 +8,7 @@ export default {
             if (confirm("are you sure")) {
                 fetch(DeleteAccountEndpoint, {
                     method: 'DELETE',
-                    headers: { 'Content-Type': 'application/json' },
-                    credentials: 'include'
+                    headers: { 'Content-Type': 'application/json' ,'Authorization': `Bearer ${localStorage.getItem("token")}`,},
                 })
                     .then((response) => response.json())
                     .then((data) => {
