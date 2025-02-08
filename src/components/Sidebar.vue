@@ -59,28 +59,54 @@ export default {
     handleResize() {
       this.isMobile = window.innerWidth < 820;
       this.isOpen = window.innerWidth >= 820; // Se è desktop, la sidebar è aperta
-    },
-    toggleSubMenu(event) {
+
+      const body = document.body;
       const sidebar = document.getElementById("sidebar");
       const toggleButton = document.getElementById("toggle-btn");
-      // Ensure event is passed and is valid
-      if (!event) return;
-
-      // Find the closest dropdown button
-      const button = event.target.closest(".dropdown-btn");
-      if (!button) return;
-
-      // Toggle submenu
-      const subMenu = button.nextElementSibling;
-      if (subMenu) {
-        subMenu.classList.toggle("show");
-        button.classList.toggle("rotate");
-      }
-      if (sidebar.classList.contains("close")) {
-        sidebar.classList.toggle("close");
-        toggleButton.classList.toggle("rotate");
+      if (this.isMobile && !sidebar.classList.contains("close")) {
+        // Se la finestra è piccola e la sidebar è aperta, chiudila
+        this.closeAllSubMenus();
+        sidebar.classList.add("close");
+        body.classList.add("sidebar-closed");
+      } else if (!this.isMobile) {
+          // Se si torna in modalità desktop, riapri la sidebar
+          sidebar.classList.remove("close");
+          body.classList.remove("sidebar-closed");
       }
     },
+    // toggleSubMenu(event) {
+    //   const sidebar = document.getElementById("sidebar");
+    //   const toggleButton = document.getElementById("toggle-btn");
+    //   // Ensure event is passed and is valid
+    //   if (!event) return;
+
+    //   // Find the closest dropdown button
+    //   const button = event.target.closest(".dropdown-btn");
+    //   if (!button) return;
+
+    //   // Toggle submenu
+    //   const subMenu = button.nextElementSibling;
+    //   if (subMenu) {
+    //     subMenu.classList.toggle("show");
+    //     button.classList.toggle("rotate");
+    //   }
+    //   if (sidebar.classList.contains("close")) {
+    //     sidebar.classList.toggle("close");
+    //     toggleButton.classList.toggle("rotate");
+    //   }
+    // },
+    toggleSubMenu(event) {
+    event.stopPropagation(); // Impedisce che il click si propaghi alla sidebar
+
+    const button = event.target.closest(".dropdown-btn");
+    if (!button) return;
+
+    const subMenu = button.nextElementSibling;
+    if (subMenu) {
+        subMenu.classList.toggle("show");
+        button.classList.toggle("rotate");
+    }
+},
     toggleSidebar() {
       const body = document.body;
       const sidebar = document.getElementById("sidebar");
@@ -104,34 +130,15 @@ export default {
         });
       }
     },
-    toggleDarkMode() {
-      document.documentElement.classList.toggle("my-app-dark");
-    },
-    storethemesetting() {
-      localStorage.setItem("theme", this.theme);
-      localStorage.setItem("text", this.text);
-    },
-    getthemesetting() {
-      let theme = localStorage.getItem("theme");
-      let text = localStorage.getItem("text");
-      if (theme) {
-        this.theme = theme;
-        this.text = text;
-      }
-    },
   },
 };
 </script>
 <template>
-  <aside id="sidebar" ref="sidebar" :class="[
-        'transition-transform duration-300 fixed left-0 top-0 h-full bg-gray-800 text-white', 
-        isOpen ? 'translate-x-0' : '-translate-x-full', 
-        isMobile ? 'w-16' : 'w-64'
-      ]">
+  <aside id="sidebar" ref="sidebar" >
     <ul>
       <li>
         <span class="logo">VolontariOn</span>
-        <button  @click="toggleSidebar()" id="toggle-btn" ref="toggle-btn">
+        <button v-if="!isMobile" @click="toggleSidebar()" id="toggle-btn" ref="toggle-btn">
           <font-awesome-icon :icon="['fas', 'angles-left']" />
         </button>
       </li>

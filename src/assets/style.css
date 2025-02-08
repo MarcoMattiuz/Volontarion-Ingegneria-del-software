@@ -72,6 +72,7 @@
     grid-column: 1;
     grid-row: 1;
     height: 100vh;
+    overflow-y: auto;
     width: var(--sidebar-full-width);
     padding: 5px 1em;
     background-color: rgb(var(--lighter));
@@ -83,6 +84,7 @@
       padding 300ms cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
     white-space: nowrap;
+    z-index: 1000
   }
 
   #sidebar ul {
@@ -211,54 +213,7 @@
 
   /* Responsive Design */
   
-  @media (max-width: 800px) {
-    .app {
-      grid-template-columns: 1fr;
-    }
-
-    main {
-      grid-column: 1;
-    }
-    body {
-      grid-template-columns: 1fr;
-    }
-
-    body.sidebar-closed {
-      grid-template-columns: 1fr;
-    }
-
-    main {
-      grid-column: 1;
-      margin-left: 0;
-      padding: 2em 1em 60px 1em;
-    }
-
-    #sidebar {
-      height: 60px;
-      width: 100%;
-      border-right: none;
-      border-top: 1px solid var(--line-clr);
-      position: fixed;
-      bottom: 0;
-      top: auto;
-    }
-
-    #sidebar.close {
-      width: 100%;
-    }
-  }
-
-  .container {
-    border: 1px solid var(--line-clr);
-    border-radius: 1em;
-    margin-bottom: 20px;
-    padding: min(3em, 15%);
-
-    h2,
-    p {
-      margin-top: 1em;
-    }
-  }
+  
   .grid {
     display: grid;
     gap: 2rem;
