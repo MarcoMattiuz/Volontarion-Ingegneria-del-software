@@ -1,5 +1,5 @@
 <script>
-import { LogOutEndpoint } from "@/endpoints";
+import { GetCurrentAssociazione, LogOutEndpoint } from "@/endpoints";
 import { GetCurrentVolontario } from "@/endpoints";
 export default {
   data() {
@@ -11,6 +11,7 @@ export default {
       text: "gray-200",
       isLoggedIn: !!sessionStorage.getItem("userType"),
       profileData: [],
+      profileDataAss: [],
     };
   },
 
@@ -18,6 +19,7 @@ export default {
     //update di tipe se userType è cambiato (da Login)
     window.addEventListener("userTypeChanged", (event) => {
       this.getDataProfilo();
+      this.getDataProfiloAss();
       this.tipo = event.detail.userType;
       this.isLoggedIn = !!sessionStorage.getItem("userType");
     });
@@ -33,9 +35,8 @@ export default {
         method: "Post",
         headers: {
           "Content-Type": "application/json",
-          'Authorization': `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-       
       })
         .then((response) => response.json())
         .then((data) => {
@@ -46,6 +47,10 @@ export default {
             localStorage.removeItem("token");
             this.isLoggedIn = false; // Imposta lo stato di login su false
             this.$router.push("/");
+            this.profileData = [];
+            this.profileDataAss = [];
+            // this.getDataProfilo();
+            // this.getDataProfiloAss();
           }
         })
         .catch((error) => {
@@ -73,9 +78,9 @@ export default {
         sidebar.classList.add("close");
         body.classList.add("sidebar-closed");
       } else if (!this.isMobile) {
-          // Se si torna in modalità desktop, riapri la sidebar
-          sidebar.classList.remove("close");
-          body.classList.remove("sidebar-closed");
+        // Se si torna in modalità desktop, riapri la sidebar
+        sidebar.classList.remove("close");
+        body.classList.remove("sidebar-closed");
       }
     },
     // toggleSubMenu(event) {
@@ -100,17 +105,17 @@ export default {
     //   }
     // },
     toggleSubMenu(event) {
-    event.stopPropagation(); // Impedisce che il click si propaghi alla sidebar
+      event.stopPropagation(); // Impedisce che il click si propaghi alla sidebar
 
-    const button = event.target.closest(".dropdown-btn");
-    if (!button) return;
+      const button = event.target.closest(".dropdown-btn");
+      if (!button) return;
 
-    const subMenu = button.nextElementSibling;
-    if (subMenu) {
+      const subMenu = button.nextElementSibling;
+      if (subMenu) {
         subMenu.classList.toggle("show");
         button.classList.toggle("rotate");
-    }
-},
+      }
+    },
     toggleSidebar() {
       const body = document.body;
       const sidebar = document.getElementById("sidebar");
@@ -138,7 +143,7 @@ export default {
       fetch(GetCurrentVolontario, {
         method: "GET",
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
         .then((response) => response.json())
@@ -150,15 +155,36 @@ export default {
           console.error("Error:", error.message);
         });
     },
+    getDataProfiloAss() {
+      fetch(GetCurrentAssociazione, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Response:", data);
+          this.profileDataAss = data;
+        })
+        .catch((error) => {
+          console.error("Error:", error.message);
+        });
+    },
   },
 };
 </script>
 <template>
-  <aside id="sidebar" ref="sidebar" >
+  <aside id="sidebar" ref="sidebar">
     <ul>
       <li>
         <span class="logo">VolontariOn</span>
-        <button v-if="!isMobile" @click="toggleSidebar()" id="toggle-btn" ref="toggle-btn">
+        <button
+          v-if="!isMobile"
+          @click="toggleSidebar()"
+          id="toggle-btn"
+          ref="toggle-btn"
+        >
           <font-awesome-icon :icon="['fas', 'angles-left']" />
         </button>
       </li>
@@ -167,6 +193,9 @@ export default {
           :src="
             profileData.profilePicture && profileData.profilePicture !== ''
               ? profileData.profilePicture
+              : profileDataAss.profilePicture &&
+                profileDataAss.profilePicture !== ''
+              ? profileDataAss.profilePicture
               : '/accountPlaceholder.jpg'
           "
           alt="Placeholder Image"
