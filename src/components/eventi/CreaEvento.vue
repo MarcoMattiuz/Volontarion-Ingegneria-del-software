@@ -59,11 +59,14 @@ export default {
             })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.response) {
+                    if (data.response === "OK") {
                         alert("Evento creato!");
                         window.dispatchEvent(new CustomEvent('update'));
                         this.closeModal();
+                    }else{
+                        alert("Errore creazione evento");
                     }
+                  
                 })
                 .catch(error => {
                     console.error("Error:", error);

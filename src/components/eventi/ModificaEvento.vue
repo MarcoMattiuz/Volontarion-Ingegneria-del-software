@@ -48,6 +48,7 @@ export default {
                         window.dispatchEvent(new CustomEvent('update'));
                         this.closeModal();
                     } else {
+                        alert("Errore edit Evento");
                         this.errorMessage = data.error || "Errore edit Evento";
                     }
                 })

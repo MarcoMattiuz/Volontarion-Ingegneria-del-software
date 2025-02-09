@@ -104,10 +104,14 @@ export default {
           if (response.status === 605) {
             this.toggleon_email_alreadyregistered();
             console.log("Associazioni - email già registrata");
+            alert("Email già registrata");
           } else {
             console.log("Associazioni - errore server");
+            alert("Errore server");
           }
           return;
+        } else {
+          alert("Associazione registrata con successo");
         }
 
         const data = await response.json();

@@ -191,10 +191,14 @@ export default {
           if (response.status === 605) {
             this.toggleon_email_alreadyregistered();
             console.log("Volontari - email già registrata");
+            alert("Email già registrata");
           } else {
             console.log("Volontari - errore server");
+            alert("Errore server");
           }
           return;
+        } else {
+          alert("Registrazione avvenuta con successo");
         }
 
         const data = await response.json();
