@@ -59,7 +59,7 @@ export default {
             })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.response === "OK") {
+                    if (data.response === "ok") {
                         alert("Evento creato!");
                         window.dispatchEvent(new CustomEvent('update'));
                         this.closeModal();

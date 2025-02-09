@@ -86,12 +86,12 @@ export default {
 
           <!-- Host (If Available) -->
           <p class="text-lg">
-            <strong>Hosted by:</strong> {{ event.hostAssociationName }}
+            <strong>Hosted by: </strong>
             <a
               @click="
                 this.$router.push(`/associazione/${event.hostAssociation}`)
               "
-              ><strong>Go to </strong> {{ event.hostAssociationName }}</a
+              ><strong>{{ event.hostAssociationName }} </strong></a
             >
           </p>
 
@@ -102,7 +102,7 @@ export default {
               {{ formattedDate(event.startDateTime) }}
             </p>
             <p>
-              <strong>⏳ End:</strong> {{ formattedDate(event.startDateTime) }}
+              <strong>⏳ End:</strong> {{ formattedDate(event.endDateTime) }}
             </p>
           </div>
 
